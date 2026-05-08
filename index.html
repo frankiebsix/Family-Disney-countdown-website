@@ -4,12 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Disney World Countdown</title>
-
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     :root {
       --ink: #ffffff;
       --muted: rgba(255, 255, 255, 0.78);
@@ -22,7 +18,6 @@
       --radius: 28px;
       --shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
     }
-
     body {
       margin: 0;
       min-height: 100vh;
@@ -35,7 +30,6 @@
         linear-gradient(135deg, #08164d 0%, #27115f 50%, #4b176c 100%);
       overflow-x: hidden;
     }
-
     body::after {
       content: "";
       position: fixed;
@@ -50,7 +44,6 @@
       z-index: -1;
       pointer-events: none;
     }
-
     .site-header {
       width: min(1180px, calc(100% - 32px));
       margin: 18px auto 0;
@@ -67,7 +60,6 @@
       top: 12px;
       z-index: 10;
     }
-
     .brand {
       color: white;
       display: flex;
@@ -78,437 +70,255 @@
       letter-spacing: -0.02em;
       cursor: pointer;
     }
-
     .brand-icon {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.16);
+      width: 38px; height: 38px; display: grid; place-items: center;
+      border-radius: 50%; background: rgba(255,255,255,0.16);
     }
-
-    .site-nav {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
+    .site-nav { display: flex; align-items: center; gap: 6px; }
     .site-nav a {
-      color: rgba(255,255,255,0.86);
-      text-decoration: none;
-      padding: 10px 13px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
+      color: rgba(255,255,255,0.86); text-decoration: none; padding: 10px 13px;
+      border-radius: 999px; font-weight: 700; font-size: 0.95rem; cursor: pointer;
     }
-
-    .site-nav a:hover,
-    .site-nav a.active {
-      color: #1c1541;
-      background: var(--gold);
-    }
-
-    main {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .page {
-      display: none;
-      padding: 42px 0 44px;
-    }
-
-    .page.active {
-      display: block;
-    }
-
+    .site-nav a:hover, .site-nav a.active { color: #1c1541; background: var(--gold); }
+    main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    .page { display: none; padding: 42px 0 44px; }
+    .page.active { display: block; }
     .hero {
-      min-height: 520px;
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      align-items: center;
-      gap: 34px;
-      padding: 30px 0 34px;
+      min-height: 520px; display: grid; grid-template-columns: 1.05fr .95fr;
+      align-items: center; gap: 34px; padding: 30px 0 34px;
     }
-
     .eyebrow {
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.13em;
-      font-size: 0.83rem;
-      font-weight: 900;
-      margin: 0 0 12px;
+      color: var(--gold); text-transform: uppercase; letter-spacing: 0.13em;
+      font-size: 0.83rem; font-weight: 900; margin: 0 0 12px;
     }
-
-    h1, h2, h3, p {
-      margin-top: 0;
-    }
-
+    h1, h2, h3, p { margin-top: 0; }
     h1 {
       font-size: clamp(2.8rem, 6.2vw, 6rem);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
-      margin-bottom: 20px;
+      line-height: 0.96; letter-spacing: -0.06em; margin-bottom: 20px;
     }
-
-    h2 {
-      font-size: clamp(1.5rem, 2.4vw, 2.2rem);
-      letter-spacing: -0.04em;
+    h2 { font-size: clamp(1.5rem, 2.4vw, 2.2rem); letter-spacing: -0.04em; }
+    h3 { font-size: 1.35rem; letter-spacing: -0.03em; }
+    .hero-copy, .glass-card p, .magic-card p {
+      color: var(--muted); line-height: 1.65; font-size: 1.05rem;
     }
-
-    h3 {
-      font-size: 1.35rem;
-      letter-spacing: -0.03em;
+    .hero-copy { max-width: 650px; font-size: 1.14rem; }
+    .hero-actions, .hunt-actions, .trivia-actions {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px;
     }
-
-    .hero-copy,
-    .glass-card p,
-    .magic-card p {
-      color: var(--muted);
-      line-height: 1.65;
-      font-size: 1.05rem;
-    }
-
-    .hero-copy {
-      max-width: 650px;
-      font-size: 1.14rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 26px;
-    }
-
     .button {
-      border: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      border-radius: 999px;
-      padding: 12px 18px;
-      font-weight: 900;
-      cursor: pointer;
-      transition: transform .18s ease, box-shadow .18s ease;
+      border: 0; display: inline-flex; align-items: center; justify-content: center;
+      text-decoration: none; border-radius: 999px; padding: 12px 18px;
+      font-weight: 900; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease;
     }
-
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    .button.primary {
-      color: #1c1541;
-      background: var(--gold);
-      box-shadow: 0 16px 34px rgba(255,216,107,0.25);
-    }
-
-    .button.secondary {
-      color: white;
-      background: rgba(255,255,255,0.14);
-      border: 1px solid var(--border);
-    }
-
+    .button:hover { transform: translateY(-2px); }
+    .button.primary { color: #1c1541; background: var(--gold); box-shadow: 0 16px 34px rgba(255,216,107,0.25); }
+    .button.secondary { color: white; background: rgba(255,255,255,0.14); border: 1px solid var(--border); }
     .castle-card {
-      min-height: 420px;
-      border-radius: 42px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06)),
+      min-height: 420px; border-radius: 42px; display: grid; place-items: center;
+      position: relative; overflow: hidden;
+      background: linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06)),
         radial-gradient(circle at 50% 20%, rgba(255,216,107,0.22), transparent 25%);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
+      border: 1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(18px);
     }
-
-    .castle {
-      font-size: clamp(8rem, 18vw, 14rem);
-      filter: drop-shadow(0 22px 18px rgba(0,0,0,0.25));
-      animation: floaty 5s ease-in-out infinite;
-    }
-
-    .moon,
-    .fireworks,
+    .castle { font-size: clamp(8rem, 18vw, 14rem); filter: drop-shadow(0 22px 18px rgba(0,0,0,0.25)); animation: floaty 5s ease-in-out infinite; }
+    .moon, .fireworks, .mickey-cloud { position: absolute; font-size: 2.1rem; }
+    .moon { top: 28px; right: 32px; }
+    .fireworks { top: 72px; left: 30px; }
     .mickey-cloud {
-      position: absolute;
-      font-size: 2.1rem;
+      bottom: 28px; right: 42px; width: 82px; height: 82px; display: grid; place-items: center;
+      border-radius: 50%; background: rgba(255,255,255,0.16);
     }
-
-    .moon {
-      top: 28px;
-      right: 32px;
+    @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+    .section-heading { margin-bottom: 18px; }
+    .countdown-grid, .feature-grid, .two-column, .weather-grid { display: grid; gap: 22px; }
+    .countdown-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 28px; }
+    .two-column { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 22px; }
+    .glass-card, .magic-card, .countdown-card, .weather-day {
+      background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px; box-shadow: var(--shadow); backdrop-filter: blur(18px);
     }
-
-    .fireworks {
-      top: 72px;
-      left: 30px;
+    .magic-card { min-height: 250px; }
+    .card-icon {
+      width: 54px; height: 54px; display: grid; place-items: center; border-radius: 18px;
+      background: rgba(255,255,255,0.14); margin-bottom: 14px; font-size: 1.7rem;
     }
-
-    .mickey-cloud {
-      bottom: 28px;
-      right: 42px;
-      width: 82px;
-      height: 82px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.16);
+    .countdown-card { position: relative; overflow: hidden; }
+    .countdown-card::before {
+      content: ""; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(255,216,107,0.18), transparent 35%); pointer-events: none;
     }
-
-    @keyframes floaty {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-14px); }
+    .countdown-card > * { position: relative; }
+    .countdown-date { color: var(--gold); font-weight: 900; margin-bottom: 10px; }
+    .countdown-note { color: var(--muted); line-height: 1.55; min-height: 46px; }
+    .time-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 18px; }
+    .time-box {
+      padding: 15px 10px; text-align: center; border-radius: 20px;
+      background: rgba(255,255,255,0.11); border: 1px solid rgba(255,255,255,0.16);
     }
-
-    .section-heading {
-      margin-bottom: 18px;
+    .time-number { display: block; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1; font-weight: 1000; letter-spacing: -0.06em; }
+    .time-label {
+      display: block; margin-top: 8px; color: rgba(255,255,255,0.75);
+      text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.78rem; font-weight: 800;
     }
-
-    .countdown-grid,
-    .feature-grid,
-    .two-column {
-      display: grid;
-      gap: 22px;
+    .small, footer p { color: rgba(255,255,255,0.68); font-size: 0.95rem; line-height: 1.55; }
+    .big-copy { font-size: 1.26rem !important; color: rgba(255,255,255,0.9) !important; }
+    .hunt-area { color: var(--gold); font-weight: 900; margin-bottom: 6px; }
+    .hunt-location { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+    .answer { margin-top: 18px; color: var(--sky); font-weight: 900; font-size: 1.15rem; display: none; }
+    .answer.show { display: block; }
+    .checklist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .check-item {
+      display: flex; gap: 12px; align-items: center; padding: 13px 14px; border-radius: 18px;
+      background: rgba(255,255,255,0.11); border: 1px solid rgba(255,255,255,0.14);
+      cursor: pointer; color: rgba(255,255,255,0.88); font-weight: 750;
     }
-
-    .countdown-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    .check-item input { transform: scale(1.25); accent-color: #ffd86b; }
+    .check-item span.done { text-decoration: line-through; color: rgba(255,255,255,0.55); }
+    .list-toolbar { display: flex; justify-content: space-between; gap: 14px; align-items: center; margin-bottom: 14px; }
+    .timeline { display: grid; gap: 18px; margin-bottom: 24px; }
+    .timeline-item { display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: start; }
+    .timeline-date {
+      color: #1c1541; background: var(--gold); border-radius: 999px;
+      padding: 10px 12px; text-align: center; font-weight: 1000;
     }
-
-    .feature-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 28px;
-    }
-
-    .two-column {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .pretty-list { line-height: 1.9; color: rgba(255,255,255,0.82); }
+    .weather-current {
+      display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center;
       margin-bottom: 22px;
     }
+    .weather-temp { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 1000; letter-spacing: -0.07em; color: var(--gold); }
+    .weather-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+    .weather-day { padding: 16px; box-shadow: 0 14px 32px rgba(0,0,0,0.22); border-radius: 20px; }
+    .weather-day strong { display: block; margin-bottom: 8px; color: var(--gold); }
+    .weather-day span { display: block; color: rgba(255,255,255,0.78); margin-top: 5px; font-size: .92rem; }
 
-    .glass-card,
-    .magic-card,
-    .countdown-card {
+    .park-plan-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+    .park-plan-card {
       background: var(--glass);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 24px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(18px);
-    }
-
-    .magic-card {
-      min-height: 250px;
-    }
-
-    .card-icon {
-      width: 54px;
-      height: 54px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.14);
-      margin-bottom: 14px;
-      font-size: 1.7rem;
-    }
-
-    .countdown-card {
       position: relative;
       overflow: hidden;
     }
-
-    .countdown-card::before {
+    .park-plan-card::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top right, rgba(255,216,107,0.18), transparent 35%);
+      background: radial-gradient(circle at top right, rgba(133,236,255,0.14), transparent 36%);
       pointer-events: none;
     }
-
-    .countdown-card > * {
+    .park-plan-card > * {
       position: relative;
     }
-
-    .countdown-date {
+    .park-date {
       color: var(--gold);
-      font-weight: 900;
+      font-weight: 1000;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-size: .84rem;
       margin-bottom: 10px;
     }
-
-    .countdown-note {
-      color: var(--muted);
-      line-height: 1.55;
-      min-height: 46px;
-    }
-
-    .time-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .time-box {
-      padding: 15px 10px;
-      text-align: center;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.11);
-      border: 1px solid rgba(255,255,255,0.16);
-    }
-
-    .time-number {
-      display: block;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 1;
-      font-weight: 1000;
-      letter-spacing: -0.06em;
-    }
-
-    .time-label {
-      display: block;
-      margin-top: 8px;
-      color: rgba(255,255,255,0.75);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-size: 0.78rem;
-      font-weight: 800;
-    }
-
-    .small,
-    footer p {
-      color: rgba(255,255,255,0.68);
-      font-size: 0.95rem;
-      line-height: 1.55;
-    }
-
-    .big-copy {
-      font-size: 1.26rem !important;
-      color: rgba(255,255,255,0.9) !important;
-    }
-
-    .answer {
-      margin-top: 18px;
-      color: var(--sky);
-      font-weight: 900;
-      font-size: 1.15rem;
-    }
-
-    .checklist {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .check-item {
+    .park-pill-row {
       display: flex;
-      gap: 12px;
-      align-items: center;
-      padding: 13px 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.11);
-      border: 1px solid rgba(255,255,255,0.14);
-      cursor: pointer;
-      color: rgba(255,255,255,0.88);
-      font-weight: 750;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0;
     }
-
-    .check-item input {
-      transform: scale(1.25);
-      accent-color: #ffd86b;
-    }
-
-    .check-item span.done {
-      text-decoration: line-through;
-      color: rgba(255,255,255,0.55);
-    }
-
-    .list-toolbar {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 18px;
-      margin-bottom: 24px;
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .timeline-date {
-      color: #1c1541;
-      background: var(--gold);
+    .park-pill {
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.9);
+      padding: 7px 10px;
       border-radius: 999px;
-      padding: 10px 12px;
-      text-align: center;
-      font-weight: 1000;
+      font-weight: 850;
+      font-size: .88rem;
+    }
+    .plan-list {
+      color: rgba(255,255,255,.82);
+      line-height: 1.75;
+      margin-bottom: 0;
     }
 
-    .pretty-list {
-      line-height: 1.9;
-      color: rgba(255,255,255,0.82);
+
+    .photo-strip {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 22px;
+      margin: 28px 0;
+    }
+    .photo-card {
+      min-height: 300px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      isolation: isolate;
+    }
+    .photo-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8,12,45,.08), rgba(8,12,45,.72));
+      z-index: 0;
+    }
+    .photo-card-content {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 20px;
+      z-index: 1;
+    }
+    .photo-card-content h2,
+    .photo-card-content h3 {
+      margin-bottom: 8px;
+    }
+    .photo-card-content p {
+      color: rgba(255,255,255,.84);
+      line-height: 1.55;
+      margin-bottom: 0;
+    }
+    .photo-credit {
+      margin-top: 10px;
+      color: rgba(255,255,255,.68);
+      font-size: .82rem;
+      line-height: 1.45;
+    }
+    .hero-photo-glow {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(180deg, rgba(16,13,60,.15), rgba(16,13,60,.60)),
+        url("https://source.unsplash.com/1200x900/?fireworks,night");
+      background-size: cover;
+      background-position: center;
+      opacity: .32;
+      z-index: -1;
     }
 
-    footer {
-      width: min(1180px, calc(100% - 32px));
-      margin: 36px auto 26px;
-      text-align: center;
-    }
-
+    footer { width: min(1180px, calc(100% - 32px)); margin: 36px auto 26px; text-align: center; }
+    @media (max-width: 1060px) { .weather-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
     @media (max-width: 940px) {
-      .hero {
-        grid-template-columns: 1fr;
-        min-height: auto;
-      }
-
-      .countdown-grid,
-      .feature-grid,
-      .two-column {
-        grid-template-columns: 1fr;
-      }
-
-      .castle-card {
-        min-height: 330px;
-      }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .countdown-grid, .feature-grid, .two-column, .park-plan-grid, .photo-strip { grid-template-columns: 1fr; }
+      .castle-card { min-height: 330px; }
     }
-
     @media (max-width: 720px) {
-      .site-header {
-        border-radius: 26px;
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .site-nav {
-        flex-wrap: wrap;
-      }
-
-      .checklist {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline-item {
-        grid-template-columns: 1fr;
-      }
-
-      .list-toolbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .site-header { border-radius: 26px; align-items: flex-start; flex-direction: column; gap: 12px; }
+      .site-nav { flex-wrap: wrap; }
+      .checklist, .weather-grid { grid-template-columns: 1fr; }
+      .timeline-item, .weather-current { grid-template-columns: 1fr; }
+      .list-toolbar { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -519,11 +329,12 @@
       <span class="brand-icon">🏰</span>
       <span>Disney Countdown</span>
     </a>
-
     <nav class="site-nav">
       <a class="active" data-page-link="home" onclick="showPage('home')">Home</a>
       <a data-page-link="daily" onclick="showPage('daily')">Daily Magic</a>
       <a data-page-link="packing" onclick="showPage('packing')">Packing</a>
+      <a data-page-link="weather" onclick="showPage('weather')">Weather</a>
+      <a data-page-link="parks" onclick="showPage('parks')">Park Plans</a>
       <a data-page-link="trip" onclick="showPage('trip')">Trip Info</a>
     </nav>
   </header>
@@ -535,17 +346,16 @@
           <p class="eyebrow">✨ Walt Disney World 2026 ✨</p>
           <h1>The magic is getting closer.</h1>
           <p class="hero-copy">
-            Count down to family check-in, your first park day, and Lightning Lane booking day.
-            Plus, get a real Hidden Mickey hunt location every day.
+            Count down to family check-in, your first park day, Lightning Lane booking day,
+            and cycle through 100 reported Hidden Mickey hunt locations.
           </p>
-
           <div class="hero-actions">
-            <button class="button primary" onclick="showPage('daily')">See Today’s Magic</button>
+            <button class="button primary" onclick="showPage('daily')">See All Daily Magic</button>
             <button class="button secondary" onclick="showPage('packing')">Open Packing List</button>
           </div>
         </div>
-
         <div class="castle-card">
+          <div class="hero-photo-glow"></div>
           <div class="moon">🌙</div>
           <div class="fireworks">🎆 ✨ 🎇</div>
           <div class="castle">🏰</div>
@@ -553,24 +363,51 @@
         </div>
       </div>
 
+
+      <section class="photo-strip">
+        <article class="photo-card" style='background-image: url("https://source.unsplash.com/1400x900/?fireworks,celebration");'>
+          <div class="photo-card-content">
+            <p class="eyebrow">Fireworks Mood</p>
+            <h2>Countdown nights should feel magical.</h2>
+            <p>This uses a free Unsplash fireworks image instead of Disney-owned character or castle artwork.</p>
+            <div class="photo-credit">Image source: Unsplash fireworks search. Attribution is appreciated but not required by the Unsplash License.</div>
+          </div>
+        </article>
+
+        <article class="photo-card" style='background-image: url("https://source.unsplash.com/900x1200/?fireworks,night-sky");'>
+          <div class="photo-card-content">
+            <p class="eyebrow">Safe Graphic Choice</p>
+            <h3>Generic fireworks, not Disney IP.</h3>
+            <p>Use this style for the site, then add your own family Disney photos later.</p>
+          </div>
+        </article>
+      </section>
+
       <div class="section-heading">
         <p class="eyebrow">Main countdowns</p>
         <h2>Important Disney dates</h2>
       </div>
-
       <div id="countdownGrid" class="countdown-grid"></div>
 
       <section class="feature-grid">
         <article class="magic-card">
           <div class="card-icon">🐭</div>
           <h3>Hidden Mickey Hunt</h3>
-          <p id="miniHiddenMickey">Loading today’s hunt...</p>
+          <div id="miniHiddenMickey"></div>
+          <div class="hunt-actions">
+            <button class="button secondary" onclick="prevHunt()">← Previous</button>
+            <button class="button primary" onclick="nextHunt()">Next →</button>
+          </div>
         </article>
 
         <article class="magic-card">
           <div class="card-icon">❓</div>
           <h3>Daily Trivia</h3>
           <p id="miniTrivia">Loading today’s trivia...</p>
+          <div class="trivia-actions">
+            <button class="button primary" onclick="toggleTriviaAnswer('miniTriviaAnswer')">Show Answer</button>
+          </div>
+          <p id="miniTriviaAnswer" class="answer"></p>
         </article>
 
         <article class="magic-card">
@@ -578,27 +415,34 @@
           <h3>Orlando Weather</h3>
           <p id="weatherSummary">Loading Orlando weather...</p>
           <p id="weatherDetails" class="small"></p>
+          <button class="button secondary" onclick="showPage('weather')">View 14-Day Forecast</button>
         </article>
       </section>
     </section>
 
     <section id="daily" class="page">
       <p class="eyebrow">Daily Magic</p>
-      <h1>One new Disney hunt every day.</h1>
+      <h1>Hidden Mickey hunt + Disney trivia.</h1>
 
       <section class="two-column">
         <article class="glass-card">
           <div class="card-icon">🐭</div>
-          <h2>Hidden Mickey Hunt of the Day</h2>
-          <p id="hiddenMickeyTip" class="big-copy">Loading today’s Hidden Mickey hunt...</p>
+          <h2>Hidden Mickey Hunt</h2>
+          <div id="hiddenMickeyTip"></div>
           <p id="hiddenMickeyCounter" class="small"></p>
+          <div class="hunt-actions">
+            <button class="button secondary" onclick="prevHunt()">← Previous Hunt</button>
+            <button class="button primary" onclick="nextHunt()">Next Hunt →</button>
+            <button class="button secondary" onclick="randomHunt()">Random</button>
+            <button class="button secondary" onclick="dailyHunt()">Today’s Hunt</button>
+          </div>
         </article>
 
         <article class="glass-card">
           <div class="card-icon">❓</div>
           <h2>Daily Disney Trivia</h2>
           <p id="triviaQuestion" class="big-copy">Loading trivia question...</p>
-          <button class="button primary" onclick="showTriviaAnswer()">Show Answer</button>
+          <button class="button primary" onclick="toggleTriviaAnswer('triviaAnswer')">Show Answer</button>
           <p id="triviaAnswer" class="answer"></p>
         </article>
       </section>
@@ -615,7 +459,6 @@
     <section id="packing" class="page">
       <p class="eyebrow">Packing Checklist</p>
       <h1>Don’t forget the park-day essentials.</h1>
-
       <section class="glass-card">
         <div class="list-toolbar">
           <h2>Disney Packing List</h2>
@@ -625,10 +468,106 @@
       </section>
     </section>
 
+    <section id="weather" class="page">
+      <p class="eyebrow">Orlando Weather</p>
+      <h1>Current weather + 14-day projection.</h1>
+
+      <section class="glass-card">
+        <div class="weather-current">
+          <div>
+            <h2>Current Conditions</h2>
+            <p id="weatherCurrentDescription">Loading current Orlando weather...</p>
+            <p id="weatherCurrentDetails" class="small"></p>
+          </div>
+          <div id="weatherCurrentTemp" class="weather-temp">--°</div>
+        </div>
+
+        <h2>Next 14 Days</h2>
+        <div id="weatherGrid" class="weather-grid"></div>
+        <p class="small">
+          Forecasts farther out are projections and will change. Always recheck closer to park days.
+        </p>
+      </section>
+    </section>
+
+
+    <section id="parks" class="page">
+      <p class="eyebrow">Park Plans</p>
+      <h1>Your park schedule at a glance.</h1>
+
+      <section class="park-plan-grid">
+        <article class="park-plan-card">
+          <div class="park-date">Monday, May 25, 2026</div>
+          <h2>EPCOT Day for Some of the Family</h2>
+          <div class="park-pill-row">
+            <span class="park-pill">EPCOT</span>
+            <span class="park-pill">Family Group</span>
+          </div>
+          <ul class="plan-list">
+            <li>Some family members plan to visit EPCOT.</li>
+            <li>Good day to use the site’s Hidden Mickey hunt for World Showcase and ride queues.</li>
+            <li>Possible snacks to track later: Mexico, Germany, Canada maple popcorn, or festival booths if available.</li>
+          </ul>
+        </article>
+
+        <article class="park-plan-card">
+          <div class="park-date">Wednesday, May 27, 2026</div>
+          <h2>Animal Kingdom Morning + EPCOT Evening</h2>
+          <div class="park-pill-row">
+            <span class="park-pill">Animal Kingdom AM</span>
+            <span class="park-pill">EPCOT PM</span>
+            <span class="park-pill">Possible Magic Kingdom EEH</span>
+          </div>
+          <ul class="plan-list">
+            <li>Start the morning at Animal Kingdom.</li>
+            <li>Move to EPCOT in the evening.</li>
+            <li>Possibly hop to Magic Kingdom for Extended Evening Hours if the schedule and energy level make sense.</li>
+          </ul>
+        </article>
+
+        <article class="park-plan-card">
+          <div class="park-date">Thursday, May 28, 2026</div>
+          <h2>Hollywood Studios Morning + Magic Kingdom Afternoon</h2>
+          <div class="park-pill-row">
+            <span class="park-pill">Hollywood Studios AM</span>
+            <span class="park-pill">Magic Kingdom PM</span>
+          </div>
+          <ul class="plan-list">
+            <li>Begin the day at Hollywood Studios.</li>
+            <li>Shift to Magic Kingdom in the afternoon.</li>
+            <li>Good candidate day for Lightning Lane strategy depending on ride priorities.</li>
+          </ul>
+        </article>
+
+        <article class="park-plan-card">
+          <div class="park-date">Friday, May 29, 2026</div>
+          <h2>Hollywood Studios Day</h2>
+          <div class="park-pill-row">
+            <span class="park-pill">Hollywood Studios</span>
+          </div>
+          <ul class="plan-list">
+            <li>Hollywood Studios is the main park plan.</li>
+            <li>Could focus on Toy Story Land, Runaway Railway, Star Wars: Galaxy’s Edge, and any missed shows.</li>
+            <li>Use the Hidden Mickey hunt list for Tower of Terror, Toy Story Mania, Runaway Railway, and Galaxy’s Edge.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="glass-card">
+        <h2>Notes to Add Later</h2>
+        <ul class="pretty-list">
+          <li>Dining reservations by day</li>
+          <li>Lightning Lane priorities</li>
+          <li>Park hop timing</li>
+          <li>Nap or pool breaks</li>
+          <li>Must-do rides and shows for each family member</li>
+        </ul>
+      </section>
+    </section>
+
     <section id="trip" class="page">
       <p class="eyebrow">Trip Info</p>
       <h1>Your Disney dates in one place.</h1>
-
       <section class="timeline">
         <article class="timeline-item">
           <span class="timeline-date">May 17, 2026</span>
@@ -637,7 +576,6 @@
             <p>Booking reminder set for 6:00 AM Central / 7:00 AM Eastern.</p>
           </div>
         </article>
-
         <article class="timeline-item">
           <span class="timeline-date">May 24, 2026</span>
           <div class="glass-card">
@@ -645,7 +583,6 @@
             <p>Family members check into their Disney hotel.</p>
           </div>
         </article>
-
         <article class="timeline-item">
           <span class="timeline-date">May 27, 2026</span>
           <div class="glass-card">
@@ -670,265 +607,602 @@
   </main>
 
   <footer>
-    <p>Made for a magical Walt Disney World trip countdown.</p>
+    <p>
+      Made for a magical Walt Disney World trip countdown. Hidden Mickey locations are reported hunt locations and may change with refurbishments.
+    </p>
   </footer>
 
   <script>
     const countdowns = [
-      {
-        title: "Lightning Lane Booking Day",
-        date: "2026-05-17T06:00:00",
-        prettyDate: "May 17, 2026 • 6:00 AM CT",
-        note: "Booking reminder for 7:00 AM Eastern."
-      },
-      {
-        title: "Family Hotel Check-In",
-        date: "2026-05-24T15:00:00",
-        prettyDate: "May 24, 2026 • 3:00 PM",
-        note: "Family members check into their Disney hotel."
-      },
-      {
-        title: "First Park Day",
-        date: "2026-05-27T08:00:00",
-        prettyDate: "May 27, 2026 • 8:00 AM",
-        note: "Your first day in the parks."
-      }
+      { title: "Lightning Lane Booking Day", date: "2026-05-17T06:00:00", prettyDate: "May 17, 2026 • 6:00 AM CT", note: "Booking reminder for 7:00 AM Eastern." },
+      { title: "Family Hotel Check-In", date: "2026-05-24T15:00:00", prettyDate: "May 24, 2026 • 3:00 PM", note: "Family members check into their Disney hotel." },
+      { title: "First Park Day", date: "2026-05-27T08:00:00", prettyDate: "May 27, 2026 • 8:00 AM", note: "Your first day in the parks." }
     ];
 
-    const hiddenMickeyTips = [
+    const hiddenMickeyHunts = [
       {
-        park: "Magic Kingdom",
-        location: "Under the Sea – Journey of The Little Mermaid queue",
-        clue: "Look through the rockwork in the queue. A well-known Hidden Mickey appears from sunlight hitting the rocks at just the right angle."
+            "area": "Magic Kingdom",
+            "location": "Haunted Mansion — ballroom dining table",
+            "clue": "Look at the dinner plates on the ballroom table. The classic three-circle plate arrangement is one of the most famous reported Hidden Mickeys."
       },
       {
-        park: "Magic Kingdom",
-        location: "Haunted Mansion ballroom scene",
-        clue: "Look at the dining table in the ballroom. The plates are arranged in the classic Mickey shape."
+            "area": "Magic Kingdom",
+            "location": "Under the Sea – Journey of The Little Mermaid — queue rockwork",
+            "clue": "Look through the rockwork in the outdoor queue. A sunlight-and-rockwork Mickey has been widely reported here."
       },
       {
-        park: "Magic Kingdom",
-        location: "Peter Pan’s Flight queue",
-        clue: "Look around the nursery and interactive queue details. Hidden Mickeys are tucked into the scenery."
+            "area": "Magic Kingdom",
+            "location": "Peter Pan’s Flight — interactive queue",
+            "clue": "Study the nursery details, shadows, toys, and wall decorations while you move through the queue."
       },
       {
-        park: "Magic Kingdom",
-        location: "Big Thunder Mountain Railroad queue",
-        clue: "Look through the mining props, rockwork, gears, and wooden details before boarding."
+            "area": "Magic Kingdom",
+            "location": "Big Thunder Mountain Railroad — queue and mine props",
+            "clue": "Search the mining equipment, gears, rocks, and wooden details before boarding."
       },
       {
-        park: "Magic Kingdom",
-        location: "Columbia Harbour House",
-        clue: "Look around the nautical decorations, wall pieces, and framed details inside the restaurant."
+            "area": "Magic Kingdom",
+            "location": "Pirates of the Caribbean — queue and jail scene details",
+            "clue": "Look through the stonework, barrels, props, and background set pieces around the attraction."
       },
       {
-        park: "Magic Kingdom",
-        location: "Buzz Lightyear’s Space Ranger Spin queue",
-        clue: "Look around the colorful space-themed walls and queue details for Mickey-shaped circles."
+            "area": "Magic Kingdom",
+            "location": "Columbia Harbour House — dining rooms",
+            "clue": "Look around the nautical decorations, framed art, wall details, and props inside the restaurant."
       },
       {
-        park: "Magic Kingdom",
-        location: "The Many Adventures of Winnie the Pooh queue",
-        clue: "Search the playful storybook-style queue details and honey-themed decorations."
+            "area": "Magic Kingdom",
+            "location": "Buzz Lightyear’s Space Ranger Spin — queue",
+            "clue": "Look around the colorful planetary graphics, space panels, circles, and queue walls."
       },
       {
-        park: "Magic Kingdom",
-        location: "Pirates of the Caribbean queue",
-        clue: "Look carefully at the stonework, jail scene details, and props around the attraction."
+            "area": "Magic Kingdom",
+            "location": "The Many Adventures of Winnie the Pooh — queue",
+            "clue": "Search the honey-themed decorations, playful storybook artwork, and queue details."
       },
       {
-        park: "EPCOT",
-        location: "Spaceship Earth",
-        clue: "While riding, look carefully at the background details in the historical scenes."
+            "area": "Magic Kingdom",
+            "location": "Tomorrowland Transit Authority PeopleMover — loading and ride views",
+            "clue": "While riding, scan Tomorrowland signs, rooftops, and attraction details from above."
       },
       {
-        park: "EPCOT",
-        location: "Living with the Land greenhouses",
-        clue: "Look for Mickey shapes in plant arrangements, produce displays, and greenhouse details."
+            "area": "Magic Kingdom",
+            "location": "Space Mountain — queue",
+            "clue": "Look at the space station graphics, panels, and wall shapes as you move through the queue."
       },
       {
-        park: "EPCOT",
-        location: "Mexico Pavilion",
-        clue: "Inside the pavilion, check the marketplace details, murals, and the Gran Fiesta Tour area."
+            "area": "Magic Kingdom",
+            "location": "Carousel of Progress — theater and pre-show area",
+            "clue": "Look around the signs, curtains, set details, and theater decorations."
       },
       {
-        park: "EPCOT",
-        location: "Germany Pavilion",
-        clue: "Look near the decorative displays, armor, clocks, and carved details."
+            "area": "Magic Kingdom",
+            "location": "Mad Tea Party — teacup area",
+            "clue": "Look at the lanterns, decorative circles, and patterns around the ride."
       },
       {
-        park: "EPCOT",
-        location: "The Seas with Nemo & Friends",
-        clue: "Look around the queue murals, ocean details, and aquarium-area decorations."
+            "area": "Magic Kingdom",
+            "location": "it’s a small world — queue and finale scenes",
+            "clue": "Watch for circle groupings in the set pieces, props, and colorful wall designs."
       },
       {
-        park: "EPCOT",
-        location: "Journey Into Imagination with Figment",
-        clue: "Look through the lab details, signs, and playful design elements around the attraction."
+            "area": "Magic Kingdom",
+            "location": "Seven Dwarfs Mine Train — queue gem area",
+            "clue": "Search the jewels, carved details, barrels, and mining-themed props."
       },
       {
-        park: "Hollywood Studios",
-        location: "Mickey & Minnie’s Runaway Railway",
-        clue: "Look throughout the queue and cartoon scenes. Mickey shapes and visual gags are hidden everywhere."
+            "area": "Magic Kingdom",
+            "location": "Jungle Cruise — queue props",
+            "clue": "Look at signs, crates, maps, and vintage expedition details in the queue."
       },
       {
-        park: "Hollywood Studios",
-        location: "Tower of Terror lobby",
-        clue: "Search the dusty props, hotel décor, lamps, and library details."
+            "area": "Magic Kingdom",
+            "location": "Swiss Family Treehouse — rooms and walkways",
+            "clue": "Study the household props, rope details, barrels, and wooden construction."
       },
       {
-        park: "Hollywood Studios",
-        location: "Toy Story Mania queue",
-        clue: "Look around the oversized toys, game boards, and colorful queue props."
+            "area": "Magic Kingdom",
+            "location": "Enchanted Tiki Room — pre-show and theater",
+            "clue": "Look around the tiki carvings, flowers, drums, and decorative patterns."
       },
       {
-        park: "Hollywood Studios",
-        location: "Star Wars: Galaxy’s Edge",
-        clue: "Look at droid parts, wall panels, marketplace details, and equipment pieces."
+            "area": "Magic Kingdom",
+            "location": "Country Bear Jamboree — lobby and theater",
+            "clue": "Search posters, woodwork, musical details, and wall decorations."
       },
       {
-        park: "Hollywood Studios",
-        location: "Muppet*Vision 3D area",
-        clue: "Look around the signs, posters, props, and silly background details near the theater."
+            "area": "Magic Kingdom",
+            "location": "Liberty Square Riverboat — dock and boat details",
+            "clue": "Look at railings, decorative trim, and signs near the dock and boat."
       },
       {
-        park: "Hollywood Studios",
-        location: "Rock ’n’ Roller Coaster queue",
-        clue: "Look around the recording studio details, posters, and backstage props."
+            "area": "Magic Kingdom",
+            "location": "Storybook Circus — signs and circus décor",
+            "clue": "Search the circus signs, posters, railings, and playful background artwork."
       },
       {
-        park: "Animal Kingdom",
-        location: "Tree of Life",
-        clue: "Look closely at the animal carvings. Some Mickey-like shapes are hidden within the designs."
+            "area": "Magic Kingdom",
+            "location": "Casey Jr. Splash ’N’ Soak Station",
+            "clue": "Look around the train details, water play structures, and circus-themed decorations."
       },
       {
-        park: "Animal Kingdom",
-        location: "Expedition Everest queue",
-        clue: "Search the expedition gear, museum displays, posters, and wall details."
+            "area": "Magic Kingdom",
+            "location": "Cinderella Castle — murals and walk-through details",
+            "clue": "Look closely at the mosaic artwork and decorative patterns inside the castle walkway."
       },
       {
-        park: "Animal Kingdom",
-        location: "Kilimanjaro Safaris",
-        clue: "Look quickly at signs, rockwork, and themed details while the safari vehicle is moving."
+            "area": "Magic Kingdom",
+            "location": "Be Our Guest Restaurant — ballroom and West Wing décor",
+            "clue": "Look at the floor patterns, dishes, wall details, and background decorations."
       },
       {
-        park: "Animal Kingdom",
-        location: "DINOSAUR queue",
-        clue: "Look through the lab displays, signs, fossils, and background props."
+            "area": "Magic Kingdom",
+            "location": "Ariel’s Grotto area",
+            "clue": "Search the shell patterns, rockwork, and seaside details near the meet-and-greet area."
       },
       {
-        park: "Animal Kingdom",
-        location: "Na’vi River Journey queue",
-        clue: "Look at the woven details, natural textures, and layered scenic elements in the queue."
+            "area": "Magic Kingdom",
+            "location": "Town Square Theater — Mickey meet-and-greet queue",
+            "clue": "Look at posters, props, curtains, and magician-themed details."
       },
       {
-        park: "Animal Kingdom",
-        location: "Festival of the Lion King area",
-        clue: "Look around the theater decorations, signs, and colorful patterns."
+            "area": "EPCOT",
+            "location": "Spaceship Earth — ride scenes",
+            "clue": "Watch the historical scenes and background props carefully while riding."
       },
       {
-        park: "Disney’s Polynesian Village Resort",
-        location: "Main lobby",
-        clue: "Look down at the flagstone-style flooring and lobby design details."
+            "area": "EPCOT",
+            "location": "Living with the Land — greenhouses",
+            "clue": "Look for Mickey shapes in plant arrangements, produce displays, tubing, and greenhouse details."
       },
       {
-        park: "Disney’s Polynesian Village Resort",
-        location: "Resort walkways and landscaping",
-        clue: "Look around the tiki details, stonework, lamps, and tropical landscaping."
+            "area": "EPCOT",
+            "location": "The Seas with Nemo & Friends — queue murals",
+            "clue": "Search the ocean-themed murals, bubbles, and aquarium-area decorations."
       },
       {
-        park: "Disney’s Coronado Springs Resort",
-        location: "The Dig Site pool area",
-        clue: "Look near the pool entrance walls and decorative stonework."
+            "area": "EPCOT",
+            "location": "Journey Into Imagination with Figment — lab details",
+            "clue": "Look through the signs, lab props, wall graphics, and playful design elements."
       },
       {
-        park: "Disney’s Coronado Springs Resort",
-        location: "Resort artwork and walkways",
-        clue: "Look closely at framed artwork, tile patterns, and decorative resort details."
+            "area": "EPCOT",
+            "location": "Mexico Pavilion — marketplace and Gran Fiesta Tour",
+            "clue": "Look at the murals, marketplace props, boat ride scenes, and festive decorations."
       },
       {
-        park: "Disney’s Grand Floridian Resort & Spa",
-        location: "Lobby and convention center areas",
-        clue: "Look up and around at architectural details, flooring, and decorative pieces."
+            "area": "EPCOT",
+            "location": "Germany Pavilion — clocks and decorative displays",
+            "clue": "Look near carved details, armor, clocks, signage, and shop decorations."
       },
       {
-        park: "Disney’s Art of Animation Resort",
-        location: "Lobby and themed resort areas",
-        clue: "Look in the carpet, animation sketches, murals, and pool-area artwork."
+            "area": "EPCOT",
+            "location": "China Pavilion — temple and garden details",
+            "clue": "Study the railings, stonework, artwork, and decorative motifs."
       },
       {
-        park: "Disney’s Port Orleans Riverside",
-        location: "Resort grounds and décor",
-        clue: "Look around signs, flooring, decorative railings, and themed architectural touches."
+            "area": "EPCOT",
+            "location": "Norway Pavilion — Frozen Ever After queue",
+            "clue": "Look around the woodwork, village details, and wall patterns in the queue."
       },
       {
-        park: "Disney’s Contemporary Resort",
-        location: "Grand Canyon Concourse",
-        clue: "Look around the murals, tile patterns, and monorail-level design details."
+            "area": "EPCOT",
+            "location": "France Pavilion — Remy’s Ratatouille Adventure queue",
+            "clue": "Search the Paris street details, signs, props, and food-themed design elements."
       },
       {
-        park: "Disney’s Wilderness Lodge",
-        location: "Lobby and fireplace area",
-        clue: "Look at carved details, floor patterns, railings, and rustic lodge decorations."
+            "area": "EPCOT",
+            "location": "United Kingdom Pavilion — shop windows and gardens",
+            "clue": "Look through window displays, garden details, and decorative shop props."
       },
       {
-        park: "Disney’s Beach Club Resort",
-        location: "Lobby and resort hallways",
-        clue: "Look around the beach-themed art, rugs, and decorative details."
+            "area": "EPCOT",
+            "location": "Canada Pavilion — rockwork and garden paths",
+            "clue": "Study the stonework, railings, and landscaping details around the pavilion."
+      },
+      {
+            "area": "EPCOT",
+            "location": "America Pavilion — lobby and rotunda",
+            "clue": "Look at floor patterns, architectural trim, and historical display details."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Italy Pavilion — fountain and architectural details",
+            "clue": "Search the stonework, decorative trim, and shop displays."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Japan Pavilion — gardens and Mitsukoshi store",
+            "clue": "Look around the garden stones, lanterns, signs, and store displays."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Morocco Pavilion — tilework and marketplace",
+            "clue": "Search the tile patterns, arches, lanterns, and marketplace details."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Mission: SPACE — queue and training areas",
+            "clue": "Look at control panels, circular graphics, and space training details."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Test Track — design studio and queue",
+            "clue": "Search car-design graphics, wheels, wall panels, and interactive displays."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Guardians of the Galaxy: Cosmic Rewind — queue",
+            "clue": "Look around display cases, cosmic graphics, and museum-style details."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Connections Café / Connections Eatery",
+            "clue": "Look around murals, tile patterns, counters, and modern design details."
+      },
+      {
+            "area": "EPCOT",
+            "location": "World Celebration gardens",
+            "clue": "Look at landscaping, lighting patterns, paving, and circular design elements."
+      },
+      {
+            "area": "EPCOT",
+            "location": "ImageWorks area",
+            "clue": "Search the interactive displays, colorful graphics, and wall patterns."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Club Cool area",
+            "clue": "Look around graphics, signage, counters, and display patterns."
+      },
+      {
+            "area": "EPCOT",
+            "location": "FriendShip Launch areas",
+            "clue": "WDWInfo reports Hidden Mickeys on life vest signs around EPCOT FriendShip launches. Check signs near the dock areas."
+      },
+      {
+            "area": "EPCOT",
+            "location": "EPCOT entrance planters and pavement",
+            "clue": "Look at landscaping, paving, and grouped circular patterns near the entrance."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Creations Shop displays",
+            "clue": "Search merchandise displays, wall art, and decorative design features."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Mickey & Minnie’s Runaway Railway — queue and ride scenes",
+            "clue": "Look through the cartoon scenes, queue posters, and visual gags."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Tower of Terror — lobby",
+            "clue": "Search dusty props, lamps, hotel décor, library details, and old-fashioned patterns."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Toy Story Mania — queue",
+            "clue": "Look around oversized toys, board games, game cards, and colorful props."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Star Wars: Galaxy’s Edge — marketplace and droid details",
+            "clue": "Look at droid parts, wall panels, equipment pieces, and marketplace props."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Millennium Falcon: Smugglers Run — queue",
+            "clue": "Search the ship details, control panels, crates, and engine-room props."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Rise of the Resistance — queue and resistance base",
+            "clue": "Look at equipment, helmets, wall markings, and themed military-style details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Slinky Dog Dash — queue and toy props",
+            "clue": "Search the oversized toy boxes, drawings, coaster details, and fence decorations."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Alien Swirling Saucers — toy set details",
+            "clue": "Look at colorful alien graphics, toy patterns, and circle groupings."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Muppet*Vision 3D — courtyard and queue",
+            "clue": "Look around signs, posters, silly props, and background jokes near the theater."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Rock ’n’ Roller Coaster — queue and studio props",
+            "clue": "Look through recording studio details, posters, backstage gear, and wall art."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Star Tours — queue",
+            "clue": "Search droid details, spaceport signs, control panels, and luggage props."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Indiana Jones Epic Stunt Spectacular — theater area",
+            "clue": "Look at stonework, crates, set pieces, and expedition-style details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Fantasmic! theater area",
+            "clue": "Look around the entry signs, railings, seating sections, and themed details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Animation Courtyard",
+            "clue": "Search banners, wall graphics, and decorative details around the courtyard."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Walt Disney Presents",
+            "clue": "Look at historical displays, photos, signs, and model details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Hollywood Boulevard — Crossroads of the World",
+            "clue": "WDWInfo reports a Hidden Mickey on the globe above the shop. Look up around the Crossroads structure."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Hollywood Studios entrance gates",
+            "clue": "WDWInfo reports Mickey shapes in the metal entrance gates. Look closely at the gate designs."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Echo Lake area",
+            "clue": "Search signs, boat details, planters, and vintage décor around the lake."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "50’s Prime Time Café",
+            "clue": "Look around kitchen props, wallpaper, plates, and retro details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Sci-Fi Dine-In Theater Restaurant",
+            "clue": "Look at car details, movie posters, star patterns, and theater props."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Docking Bay 7 Food and Cargo",
+            "clue": "Search crates, machinery, wall panels, and cargo details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Toy Story Land entrance area",
+            "clue": "Look at Andy’s drawings, fence details, toy blocks, and oversized props."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Sunset Boulevard shop windows",
+            "clue": "Study window displays, posters, lighting, and decorative circles."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Hollywood Brown Derby",
+            "clue": "Look at wall art, plates, restaurant details, and decorative patterns."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Disney Junior Play and Dance area",
+            "clue": "Look around bright set pieces, wall art, and kid-friendly shapes."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Tree of Life — animal carvings",
+            "clue": "Look closely at the carvings. Mickey-like shapes can hide inside the animal designs."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Expedition Everest — queue museum",
+            "clue": "Search expedition gear, posters, display cases, ropes, and wall details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Kilimanjaro Safaris — signs and safari details",
+            "clue": "Look quickly at signs, rockwork, and themed props while the vehicle is moving."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "DINOSAUR — queue lab displays",
+            "clue": "Look through lab props, fossils, signs, and background equipment."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Na’vi River Journey — queue",
+            "clue": "Search woven details, natural textures, lanterns, and layered scenic elements."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Avatar Flight of Passage — queue lab and cave areas",
+            "clue": "Look at cave drawings, lab equipment, circular details, and wall graphics."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Festival of the Lion King — theater area",
+            "clue": "Look around colorful signs, theater decorations, and patterned artwork."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Finding Nemo: The Big Blue… and Beyond! — theater area",
+            "clue": "Search ocean graphics, wall patterns, signs, and theater details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "It’s Tough to Be a Bug! / Tree of Life theater area",
+            "clue": "Look around roots, carvings, posters, and theater approach details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Maharajah Jungle Trek",
+            "clue": "Study murals, stonework, railings, animal habitats, and decorative patterns."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Gorilla Falls Exploration Trail",
+            "clue": "Look at trail signs, animal habitat details, rockwork, and educational displays."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Kali River Rapids — queue",
+            "clue": "Search signs, carved wood, equipment, and environmental storytelling details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Yak & Yeti Restaurant area",
+            "clue": "Look at décor, wall art, statues, and patterned details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Asia marketplace area",
+            "clue": "Search signs, lanterns, painted details, and decorative props."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Harambe Market",
+            "clue": "Look at signs, murals, crates, posters, and market details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Conservation Station",
+            "clue": "Look through educational displays, murals, signs, and animal-care details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Rafiki’s Planet Watch train area",
+            "clue": "Search the station signs, graphics, railings, and display details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Discovery Island trails",
+            "clue": "Look at carved details, landscaping, and signs around the trails."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Flame Tree Barbecue seating areas",
+            "clue": "Search the covered pavilions, carved animals, signs, and seating-area patterns."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "DinoLand U.S.A. carnival details",
+            "clue": "Look around signs, game booths, fencing, and colorful circles."
+      },
+      {
+            "area": "Disney’s Polynesian Village Resort",
+            "location": "Main lobby floor and decorative details",
+            "clue": "Look down at flagstone-style flooring and around the lobby’s tropical design."
+      },
+      {
+            "area": "Disney’s Polynesian Village Resort",
+            "location": "Resort walkways and tiki details",
+            "clue": "Search tiki carvings, stonework, lamps, signs, and tropical landscaping."
+      },
+      {
+            "area": "Disney’s Coronado Springs Resort",
+            "location": "The Dig Site pool entrance area",
+            "clue": "WDWInfo reports Hidden Mickeys near the Dig Site pool entrance walls. Look at wall designs and stonework."
+      },
+      {
+            "area": "Disney’s Coronado Springs Resort",
+            "location": "Resort artwork and walkways",
+            "clue": "Look closely at framed art, tile patterns, fountains, and decorative resort details."
+      },
+      {
+            "area": "Disney’s Contemporary Resort",
+            "location": "Grand Canyon Concourse",
+            "clue": "Search the large murals, tile patterns, monorail-level details, and decorative shapes."
       }
-    ];
-
+];
     const disneyTrivia = [
       {
-        question: "What year did Walt Disney World officially open?",
-        answer: "1971."
+            "question": "What year did Walt Disney World officially open?",
+            "answer": "1971."
       },
       {
-        question: "Which park has Spaceship Earth?",
-        answer: "EPCOT."
+            "question": "Which park has Spaceship Earth?",
+            "answer": "EPCOT."
       },
       {
-        question: "Which park has the Tree of Life?",
-        answer: "Disney’s Animal Kingdom."
+            "question": "Which park has the Tree of Life?",
+            "answer": "Disney’s Animal Kingdom."
       },
       {
-        question: "What is the name of the hotel with a South Pacific theme on the monorail line?",
-        answer: "Disney’s Polynesian Village Resort."
+            "question": "What is the name of the hotel with a South Pacific theme on the monorail line?",
+            "answer": "Disney’s Polynesian Village Resort."
       },
       {
-        question: "Which Magic Kingdom land has Pirates of the Caribbean?",
-        answer: "Adventureland."
+            "question": "Which Magic Kingdom land has Pirates of the Caribbean?",
+            "answer": "Adventureland."
       },
       {
-        question: "Which park is home to Star Wars: Galaxy’s Edge?",
-        answer: "Disney’s Hollywood Studios."
+            "question": "Which park is home to Star Wars: Galaxy’s Edge?",
+            "answer": "Disney’s Hollywood Studios."
       },
       {
-        question: "Which Magic Kingdom attraction features 999 happy haunts?",
-        answer: "The Haunted Mansion."
+            "question": "Which Magic Kingdom attraction features 999 happy haunts?",
+            "answer": "The Haunted Mansion."
       },
       {
-        question: "What nighttime show is famous for fireworks over Cinderella Castle?",
-        answer: "Happily Ever After."
+            "question": "What nighttime show is famous for fireworks over Cinderella Castle?",
+            "answer": "Happily Ever After."
       },
       {
-        question: "Which EPCOT attraction is inside the giant silver sphere?",
-        answer: "Spaceship Earth."
+            "question": "Which EPCOT attraction is inside the giant silver sphere?",
+            "answer": "Spaceship Earth."
       },
       {
-        question: "What is Mickey Mouse’s girlfriend’s name?",
-        answer: "Minnie Mouse."
+            "question": "What is Mickey Mouse’s girlfriend’s name?",
+            "answer": "Minnie Mouse."
       },
       {
-        question: "Which Disney park has Pandora – The World of Avatar?",
-        answer: "Disney’s Animal Kingdom."
+            "question": "Which Disney park has Pandora – The World of Avatar?",
+            "answer": "Disney’s Animal Kingdom."
       },
       {
-        question: "Which resort is known for its monorail running through the main building?",
-        answer: "Disney’s Contemporary Resort."
+            "question": "Which resort is known for its monorail running through the main building?",
+            "answer": "Disney’s Contemporary Resort."
+      },
+      {
+            "question": "Which Disney World park opened in 1989?",
+            "answer": "Disney’s Hollywood Studios."
+      },
+      {
+            "question": "Which Disney World park opened in 1998?",
+            "answer": "Disney’s Animal Kingdom."
+      },
+      {
+            "question": "What mountain ride is located in Frontierland?",
+            "answer": "Big Thunder Mountain Railroad."
+      },
+      {
+            "question": "Which Disney World resort has the Grand Canyon Concourse?",
+            "answer": "Disney’s Contemporary Resort."
+      },
+      {
+            "question": "Which EPCOT pavilion has the Gran Fiesta Tour?",
+            "answer": "Mexico Pavilion."
+      },
+      {
+            "question": "Which park has Expedition Everest?",
+            "answer": "Disney’s Animal Kingdom."
+      },
+      {
+            "question": "Which Hollywood Studios attraction stars Mickey and Minnie in a cartoon world?",
+            "answer": "Mickey & Minnie’s Runaway Railway."
+      },
+      {
+            "question": "Which Magic Kingdom ride features the song 'Yo Ho'?",
+            "answer": "Pirates of the Caribbean."
       }
-    ];
-
+];
     const packingItems = [
       "MagicBands",
       "Park tickets linked in My Disney Experience",
@@ -956,34 +1230,23 @@
       "Moleskin for blisters",
       "Light jacket or hoodie",
       "Kids’ headphones or comfort items"
-    ];
+];
 
     let todayTrivia = null;
+    let currentHuntIndex = getDailyIndex(hiddenMickeyHunts.length);
 
     function showPage(pageId) {
-      document.querySelectorAll(".page").forEach(page => {
-        page.classList.remove("active");
-      });
-
+      document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
       document.getElementById(pageId).classList.add("active");
-
-      document.querySelectorAll("[data-page-link]").forEach(link => {
-        link.classList.remove("active");
-      });
-
+      document.querySelectorAll("[data-page-link]").forEach(link => link.classList.remove("active"));
       const activeLink = document.querySelector(`[data-page-link="${pageId}"]`);
       if (activeLink) activeLink.classList.add("active");
-
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function formatRemaining(ms) {
-      if (ms <= 0) {
-        return { days: 0, hours: 0, mins: 0, secs: 0, complete: true };
-      }
-
+      if (ms <= 0) return { days: 0, hours: 0, mins: 0, secs: 0, complete: true };
       const totalSeconds = Math.floor(ms / 1000);
-
       return {
         days: Math.floor(totalSeconds / 86400),
         hours: Math.floor((totalSeconds % 86400) / 3600),
@@ -1000,48 +1263,28 @@
           <div class="countdown-date">${item.prettyDate}</div>
           <p class="countdown-note">${item.note}</p>
           <div class="time-grid">
-            <div class="time-box">
-              <span class="time-number" id="days-${index}">--</span>
-              <span class="time-label">Days</span>
-            </div>
-            <div class="time-box">
-              <span class="time-number" id="hours-${index}">--</span>
-              <span class="time-label">Hours</span>
-            </div>
-            <div class="time-box">
-              <span class="time-number" id="mins-${index}">--</span>
-              <span class="time-label">Mins</span>
-            </div>
-            <div class="time-box">
-              <span class="time-number" id="secs-${index}">--</span>
-              <span class="time-label">Secs</span>
-            </div>
+            <div class="time-box"><span class="time-number" id="days-${index}">--</span><span class="time-label">Days</span></div>
+            <div class="time-box"><span class="time-number" id="hours-${index}">--</span><span class="time-label">Hours</span></div>
+            <div class="time-box"><span class="time-number" id="mins-${index}">--</span><span class="time-label">Mins</span></div>
+            <div class="time-box"><span class="time-number" id="secs-${index}">--</span><span class="time-label">Secs</span></div>
           </div>
           <p class="small" id="message-${index}"></p>
-        </article>
-      `;
+        </article>`;
     }
 
     function renderCountdownCards() {
-      const grid = document.getElementById("countdownGrid");
-      grid.innerHTML = countdowns.map(createCountdownCard).join("");
+      document.getElementById("countdownGrid").innerHTML = countdowns.map(createCountdownCard).join("");
     }
 
     function updateCountdowns() {
       const now = new Date().getTime();
-
       countdowns.forEach((item, index) => {
-        const target = new Date(item.date).getTime();
-        const remaining = formatRemaining(target - now);
-
+        const remaining = formatRemaining(new Date(item.date).getTime() - now);
         document.getElementById(`days-${index}`).textContent = remaining.days;
         document.getElementById(`hours-${index}`).textContent = String(remaining.hours).padStart(2, "0");
         document.getElementById(`mins-${index}`).textContent = String(remaining.mins).padStart(2, "0");
         document.getElementById(`secs-${index}`).textContent = String(remaining.secs).padStart(2, "0");
-
-        document.getElementById(`message-${index}`).textContent = remaining.complete
-          ? "🎉 It’s here. Time for the magic."
-          : "✨ The magic is getting closer.";
+        document.getElementById(`message-${index}`).textContent = remaining.complete ? "🎉 It’s here. Time for the magic." : "✨ The magic is getting closer.";
       });
     }
 
@@ -1053,43 +1296,66 @@
       return ((dayIndex % length) + length) % length;
     }
 
-    function renderDailyMagic() {
-      const tipIndex = getDailyIndex(hiddenMickeyTips.length);
-      const triviaIndex = getDailyIndex(disneyTrivia.length);
-
-      const tip = hiddenMickeyTips[tipIndex];
-      const tipText = `${tip.park} — ${tip.location}: ${tip.clue}`;
-
-      todayTrivia = disneyTrivia[triviaIndex];
-
-      document.getElementById("miniHiddenMickey").textContent = tipText;
-      document.getElementById("hiddenMickeyTip").textContent = tipText;
-      document.getElementById("hiddenMickeyCounter").textContent =
-        `Hidden Mickey Hunt ${tipIndex + 1} of ${hiddenMickeyTips.length}`;
-
-      document.getElementById("miniTrivia").textContent = todayTrivia.question;
-      document.getElementById("triviaQuestion").textContent = todayTrivia.question;
-      document.getElementById("triviaAnswer").textContent = "";
+    function huntMarkup(hunt) {
+      return `
+        <div class="hunt-area">${hunt.area}</div>
+        <div class="hunt-location">${hunt.location}</div>
+        <p>${hunt.clue}</p>
+      `;
     }
 
-    function showTriviaAnswer() {
+    function renderHunt() {
+      const hunt = hiddenMickeyHunts[currentHuntIndex];
+      document.getElementById("miniHiddenMickey").innerHTML = huntMarkup(hunt);
+      document.getElementById("hiddenMickeyTip").innerHTML = huntMarkup(hunt);
+      document.getElementById("hiddenMickeyCounter").textContent =
+        `Hidden Mickey Hunt ${currentHuntIndex + 1} of ${hiddenMickeyHunts.length}`;
+    }
+
+    function nextHunt() {
+      currentHuntIndex = (currentHuntIndex + 1) % hiddenMickeyHunts.length;
+      renderHunt();
+    }
+
+    function prevHunt() {
+      currentHuntIndex = (currentHuntIndex - 1 + hiddenMickeyHunts.length) % hiddenMickeyHunts.length;
+      renderHunt();
+    }
+
+    function randomHunt() {
+      currentHuntIndex = Math.floor(Math.random() * hiddenMickeyHunts.length);
+      renderHunt();
+    }
+
+    function dailyHunt() {
+      currentHuntIndex = getDailyIndex(hiddenMickeyHunts.length);
+      renderHunt();
+    }
+
+    function renderTrivia() {
+      const triviaIndex = getDailyIndex(disneyTrivia.length);
+      todayTrivia = disneyTrivia[triviaIndex];
+      document.getElementById("miniTrivia").textContent = todayTrivia.question;
+      document.getElementById("triviaQuestion").textContent = todayTrivia.question;
+      document.getElementById("miniTriviaAnswer").textContent = todayTrivia.answer;
       document.getElementById("triviaAnswer").textContent = todayTrivia.answer;
+    }
+
+    function toggleTriviaAnswer(answerId) {
+      const answer = document.getElementById(answerId);
+      answer.classList.toggle("show");
     }
 
     function renderPackingList() {
       const container = document.getElementById("packingList");
       const saved = JSON.parse(localStorage.getItem("packingChecklist") || "{}");
-
       container.innerHTML = packingItems.map((item, index) => {
         const checked = saved[index] ? "checked" : "";
         const doneClass = saved[index] ? "done" : "";
-
-        return `
-          <label class="check-item">
-            <input type="checkbox" ${checked} onchange="savePackingItem(${index}, this.checked)" />
-            <span class="${doneClass}" id="packingText-${index}">${item}</span>
-          </label>
-        `;
+        return `<label class="check-item">
+          <input type="checkbox" ${checked} onchange="savePackingItem(${index}, this.checked)" />
+          <span class="${doneClass}" id="packingText-${index}">${item}</span>
+        </label>`;
       }).join("");
     }
 
@@ -1097,9 +1363,7 @@
       const saved = JSON.parse(localStorage.getItem("packingChecklist") || "{}");
       saved[index] = checked;
       localStorage.setItem("packingChecklist", JSON.stringify(saved));
-
-      const text = document.getElementById(`packingText-${index}`);
-      text.classList.toggle("done", checked);
+      document.getElementById(`packingText-${index}`).classList.toggle("done", checked);
     }
 
     function resetPackingList() {
@@ -1109,54 +1373,68 @@
 
     function weatherCodeToText(code) {
       const codes = {
-        0: "Clear sky",
-        1: "Mainly clear",
-        2: "Partly cloudy",
-        3: "Overcast",
-        45: "Fog",
-        48: "Fog",
-        51: "Light drizzle",
-        53: "Drizzle",
-        55: "Heavy drizzle",
-        61: "Light rain",
-        63: "Rain",
-        65: "Heavy rain",
-        80: "Rain showers",
-        81: "Rain showers",
-        82: "Heavy rain showers",
-        95: "Thunderstorms"
+        0: "Clear sky", 1: "Mainly clear", 2: "Partly cloudy", 3: "Overcast",
+        45: "Fog", 48: "Fog", 51: "Light drizzle", 53: "Drizzle", 55: "Heavy drizzle",
+        61: "Light rain", 63: "Rain", 65: "Heavy rain", 71: "Light snow", 73: "Snow",
+        80: "Rain showers", 81: "Rain showers", 82: "Heavy rain showers", 95: "Thunderstorms"
       };
-
       return codes[code] || "Weather update";
+    }
+
+    function formatWeatherDate(dateString) {
+      const date = new Date(dateString + "T12:00:00");
+      return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
     }
 
     async function loadOrlandoWeather() {
       const summary = document.getElementById("weatherSummary");
       const details = document.getElementById("weatherDetails");
+      const currentDescription = document.getElementById("weatherCurrentDescription");
+      const currentDetails = document.getElementById("weatherCurrentDetails");
+      const currentTempEl = document.getElementById("weatherCurrentTemp");
+      const grid = document.getElementById("weatherGrid");
 
       try {
-        const url = "https://api.open-meteo.com/v1/forecast?latitude=28.5383&longitude=-81.3792&current=temperature_2m,apparent_temperature,precipitation,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=America%2FNew_York";
-
+        const url = "https://api.open-meteo.com/v1/forecast?latitude=28.5383&longitude=-81.3792&current=temperature_2m,apparent_temperature,precipitation,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=America%2FNew_York&forecast_days=14";
         const response = await fetch(url);
         const data = await response.json();
 
         const currentTemp = Math.round(data.current.temperature_2m);
         const feelsLike = Math.round(data.current.apparent_temperature);
         const weatherText = weatherCodeToText(data.current.weather_code);
-        const high = Math.round(data.daily.temperature_2m_max[0]);
-        const low = Math.round(data.daily.temperature_2m_min[0]);
-        const rainChance = data.daily.precipitation_probability_max[0];
 
         summary.textContent = `${weatherText}. Current Orlando temperature: ${currentTemp}°F, feels like ${feelsLike}°F.`;
-        details.textContent = `Today: high ${high}°F, low ${low}°F, rain chance ${rainChance}%.`;
+        details.textContent = `Tap “View 14-Day Forecast” to see the full projection.`;
+        currentDescription.textContent = `${weatherText} in Orlando right now.`;
+        currentDetails.textContent = `Current: ${currentTemp}°F. Feels like: ${feelsLike}°F. Current precipitation: ${data.current.precipitation} in.`;
+        currentTempEl.textContent = `${currentTemp}°`;
+
+        grid.innerHTML = data.daily.time.map((date, i) => {
+          const high = Math.round(data.daily.temperature_2m_max[i]);
+          const low = Math.round(data.daily.temperature_2m_min[i]);
+          const rain = data.daily.precipitation_probability_max[i];
+          const text = weatherCodeToText(data.daily.weather_code[i]);
+          return `<article class="weather-day">
+            <strong>${formatWeatherDate(date)}</strong>
+            <span>${text}</span>
+            <span>High: ${high}°F</span>
+            <span>Low: ${low}°F</span>
+            <span>Rain: ${rain}%</span>
+          </article>`;
+        }).join("");
       } catch (error) {
         summary.textContent = "Weather could not be loaded right now.";
         details.textContent = "Check a weather app before park days, especially for afternoon storms.";
+        currentDescription.textContent = "Weather could not be loaded right now.";
+        currentDetails.textContent = "Try refreshing the page.";
+        currentTempEl.textContent = "--°";
+        grid.innerHTML = "";
       }
     }
 
     renderCountdownCards();
-    renderDailyMagic();
+    renderHunt();
+    renderTrivia();
     renderPackingList();
     loadOrlandoWeather();
     updateCountdowns();
