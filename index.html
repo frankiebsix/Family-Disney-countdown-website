@@ -270,6 +270,90 @@
       margin-bottom: 0;
     }
 
+
+    .food-intro { margin-bottom: 22px; }
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+    .food-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+    }
+    .food-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255,216,107,0.14), transparent 36%);
+      pointer-events: none;
+    }
+    .food-card > * { position: relative; }
+    .food-location {
+      color: var(--gold);
+      font-weight: 1000;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-size: .8rem;
+      margin-bottom: 10px;
+    }
+    .food-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 12px;
+    }
+    .food-columns h3 {
+      font-size: 1rem;
+      color: var(--sky);
+      margin-bottom: 8px;
+    }
+    .food-columns ol {
+      color: rgba(255,255,255,.84);
+      line-height: 1.65;
+      padding-left: 20px;
+      margin: 0;
+    }
+    .food-columns p {
+      color: rgba(255,255,255,.84);
+      margin-bottom: 0;
+    }
+    .food-note {
+      border-top: 1px solid rgba(255,255,255,.14);
+      margin-top: 16px;
+      padding-top: 14px;
+      color: rgba(255,255,255,.72) !important;
+      font-size: .95rem !important;
+    }
+
+
+    .official-photo-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 14px;
+      border: 1px solid rgba(255,255,255,.20);
+      background: rgba(255,255,255,.12);
+      color: var(--gold);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-weight: 900;
+      font-size: .92rem;
+    }
+
+    .official-photo-link:hover {
+      background: rgba(255,216,107,.18);
+      transform: translateY(-1px);
+    }
+
     footer { width: min(1180px, calc(100% - 32px)); margin: 36px auto 26px; text-align: center; }    @media (max-width: 1060px) {
       .weather-grid {
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -279,7 +363,8 @@
     @media (max-width: 940px) {
       .feature-grid,
       .two-column,
-      .park-plan-grid {
+      .park-plan-grid,
+      .food-grid {
         grid-template-columns: 1fr;
       }
 
@@ -309,7 +394,8 @@
       }
 
       .timeline-item,
-      .weather-current {
+      .weather-current,
+      .food-columns {
         grid-template-columns: 1fr;
       }
 
@@ -333,6 +419,7 @@
       <a data-page-link="packing" onclick="showPage('packing')">Packing</a>
       <a data-page-link="weather" onclick="showPage('weather')">Weather</a>
       <a data-page-link="parks" onclick="showPage('parks')">Park Plans</a>
+      <a data-page-link="food" onclick="showPage('food')">Food</a>
       <a data-page-link="trip" onclick="showPage('trip')">Trip Info</a>
     </nav>
   </header>
@@ -530,6 +617,422 @@
         </ul>
       </section>
     </section>
+
+
+    <section id="food" class="page">
+      <p class="eyebrow">EPCOT Flower & Garden Food</p>
+      <h1>Festival food plan for your EPCOT days.</h1>
+
+      <section class="glass-card food-intro">
+        <h2>What this page is for</h2>
+        <p>
+          The 2026 EPCOT International Flower & Garden Festival runs March 4 through June 1,
+          so it should be active during your May trip. This page gives a practical booth-by-booth
+          shortlist: two items to consider and one gluten-free-friendly pick where the research supports it.
+          The official Disney photos are linked instead of embedded to avoid copying Disney-owned images.
+        </p>
+        <p class="small">
+          Allergy reminder: Disney says guests should speak with a Cast Member about allergy-friendly requests,
+          cross-contact cannot be guaranteed, and menus can change. Use this as a planning list, then verify at the booth.
+        </p>
+      </section>
+
+      <section class="glass-card food-intro">
+        <h2>Quick hit list</h2>
+        <ul class="pretty-list">
+          <li><strong>Best savory route:</strong> Northern Bloom scallops or beef tips, Trowel & Trellis pork ribs, Magnolia Terrace shrimp po’ boy.</li>
+          <li><strong>Best gluten-free-friendly route:</strong> Northern Bloom, La Isla Fresca, Beach Grub corn, Yacht Grub dips/chips, Pineapple Promenade DOLE Whip in a cup.</li>
+          <li><strong>Kid-friendly / easy wins:</strong> Frozen Desert Violet Lemonade, Orange-Lemon Smoothie, Frushi, DOLE Whip Pineapple or Peach.</li>
+          <li><strong>Important date note:</strong> Florida Fresh is listed through May 25; EPCOT visitors on May 27 likely should not count on that booth.</li>
+        </ul>
+      </section>
+
+      <section class="food-grid">
+
+        <article class="food-card">
+          <div class="food-location">CommuniCore Plaza • Available through May 25</div>
+          <h2>Florida Fresh</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Blackened Fish Slider</li><li>Florida Strawberry Shortcake</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>No strong gluten-free entrée from the main menu sources; check Disney allergy info/Cast Member. This booth ends May 25, so it mainly helps the EPCOT group going that day.</p>
+            </div>
+          </div>
+          <p class="food-note">WDWNT ranked the Florida Strawberry Shortcake in its Best 7, but Florida Fresh is scheduled only through May 25.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Odyssey Events Pavilion</div>
+          <h2>The Citrus Blossom</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Cinnamon Beignets</li><li>Orange-Lemon Smoothie</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>No clear gluten-free food pick from the menu sources. Treat this more as a drink/sipper stop and verify with a Cast Member.</p>
+            </div>
+          </div>
+          <p class="food-note">DFB called the Cinnamon Beignets one of the new bests and the Orange-Lemon Smoothie a kid-friendly highlight.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Near Test Track</div>
+          <h2>BRUNCHCOT</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Shrimp and Grits</li><li>Avocado Toast</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>No clear gluten-free listing found for the booth’s food items. Ask for the allergy binder before ordering.</p>
+            </div>
+          </div>
+          <p class="food-note">French Toast had mixed/negative review notes from WDWNT, so it is not a priority here.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Mexico</div>
+          <h2>Jardin de Fiestas</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Chilaquiles con Carne</li><li>Flan de la Abuela</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Potential ask: Chilaquiles con Carne may be worth checking because it uses corn tortillas, but this is not confirmed gluten-free here.</p>
+            </div>
+          </div>
+          <p class="food-note">Skip the Flower Power Margarita based on WDWNT’s review.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">China</div>
+          <h2>Lan Yuan</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Sha Cha Beef Bao Bun</li><li>Tanghulu</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Tanghulu is the best gluten-free question to ask about, but confirm the ingredient binder due booth prep/cross-contact.</p>
+            </div>
+          </div>
+          <p class="food-note">Disney specifically highlighted Sha Cha Beef Bao Bun as a new eat to try.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Germany</div>
+          <h2>Bauernmarkt: Farmer’s Market</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Warm Cheese Strudel</li><li>Toasted Pretzel Bread with Black Forest Ham and Melted Cheese</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Potato Pancakes with house-made applesauce — listed gluten-free and plant-based.</p>
+            </div>
+          </div>
+          <p class="food-note">DFB called Warm Cheese Strudel a must-have and the Pretzel Bread another favorite.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Italy</div>
+          <h2>Primavera Kitchen</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Arancini</li><li>Raspberry Swirl Cheesecake</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>No clear gluten-free food pick from the menu sources; lower-priority for gluten-free.</p>
+            </div>
+          </div>
+          <p class="food-note">WDWNT was very negative on the Insalata di Pasta, so it is excluded.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">The American Adventure</div>
+          <h2>Magnolia Terrace</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Blackened Shrimp Po’ Boy</li><li>Grilled Gulf Oysters</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Grilled Gulf Oysters with cajun andouille sausage butter and lemon — listed gluten-free.</p>
+            </div>
+          </div>
+          <p class="food-note">WDWNT ranked the Shrimp Po’ Boy as its #1 best item.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Japan</div>
+          <h2>Hanami</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Frushi</li><li>Japanese Curry Bread</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Frushi — Gluten Free &amp; Dairy Free at WDW says the ingredients binder confirmed it gluten-free with no modifications, though this is a third-party booth.</p>
+            </div>
+          </div>
+          <p class="food-note">Frushi is one of the classic Flower &amp; Garden items.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Morocco</div>
+          <h2>Tangierine Café: Flavors of the Medina</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Chermoula Chicken Moroccan Wrap</li><li>Moroccan-Spiced Lamb Moroccan Wrap</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Chermoula Chicken or Moroccan-Spiced Lamb wrap fillings are listed gluten-free, but verify the bread/serving style.</p>
+            </div>
+          </div>
+          <p class="food-note">Focus on the meats, not the stone-baked bread.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Between Morocco and France</div>
+          <h2>La Isla Fresca</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Jamaican Jerk Chicken</li><li>Coconut-Chocolate Flancocho</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Jamaican Jerk Chicken and Coconut-Chocolate Flancocho are both listed gluten-free.</p>
+            </div>
+          </div>
+          <p class="food-note">WDWNT did not like the ceviche, so it is not a top pick.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">France</div>
+          <h2>Fleur de Lys</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Tarte Aux Oignons Caramélisés</li><li>Canard Confit with Herbed Polenta Corn Cake</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>No clear gluten-free pick found. The duck/polenta dish is the item to ask about, but do not assume.</p>
+            </div>
+          </div>
+          <p class="food-note">DFB and WDWNT both praised the French savory items.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Canada</div>
+          <h2>Northern Bloom</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Seared Scallops</li><li>Beef Tenderloin Tips</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Both Seared Scallops and Beef Tenderloin Tips are listed gluten-free.</p>
+            </div>
+          </div>
+          <p class="food-note">One of the best booths for real gluten-free savory choices.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Near Canada</div>
+          <h2>Refreshment Port</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Provence Poutine</li><li>Frozen Mojito</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Provence Poutine — listed gluten-free.</p>
+            </div>
+          </div>
+          <p class="food-note">Good stop for a hearty snack if you are near Canada.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Between World Showcase and Imagination!</div>
+          <h2>Swirled Showcase</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>DOLE Whip Peach</li><li>Liquid Nitro Honey-Mascarpone Cheesecake</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Liquid Nitro Honey-Mascarpone Cheesecake is listed gluten-free. DOLE Whip-style items may be gluten-free in a cup; avoid cones and verify.</p>
+            </div>
+          </div>
+          <p class="food-note">DFB named both DOLE Whip Peach and the cheesecake Best of the Fest picks.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Between World Showcase and Imagination!</div>
+          <h2>The Honey Bee-stro</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Honeycomb Bowl</li><li>Chicken and Waffles</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>No clear gluten-free listing for the top items. Honeycomb Bowl is a strong general pick, but verify carefully.</p>
+            </div>
+          </div>
+          <p class="food-note">WDWNT ranked the Honeycomb Bowl in its Best 7.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Near Port of Entry</div>
+          <h2>Pineapple Promenade</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Frozen Desert Violet Lemonade</li><li>DOLE Whip Pineapple</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>DOLE Whip Pineapple — listed gluten-free when served without a cone.</p>
+            </div>
+          </div>
+          <p class="food-note">Frozen Desert Violet Lemonade remains a classic kid/adult favorite.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Near Disney Traders</div>
+          <h2>Trowel &amp; Trellis</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Miso Cola-glazed Sticky Pork Ribs</li><li>Chocolate Mousse Terrarium</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Chocolate Mousse Terrarium — listed gluten-free.</p>
+            </div>
+          </div>
+          <p class="food-note">DFB named Trowel &amp; Trellis Best Booth of the Fest; WDWNT also liked the pork rib.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Between World Showcase and Imagination!</div>
+          <h2>Beach Grub</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Grilled Street Corn on the Cob</li><li>Seafood Bake</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Grilled Street Corn on the Cob — listed gluten-free and plant-based.</p>
+            </div>
+          </div>
+          <p class="food-note">DFB called the grilled street corn one of the best plant-based dishes.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Between World Showcase and Imagination!</div>
+          <h2>Yacht Grub</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Trio of Dips and Chips</li><li>Captain’s Board</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Trio of Dips and Chips — listed gluten-free.</p>
+            </div>
+          </div>
+          <p class="food-note">DFB called the Trio of Dips and Chips a returning best.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">The Land kiosk</div>
+          <h2>Nectar hosted by AdventHealth</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Tuna Poke Bowl</li><li>Plant-Based Poke Bowl</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Ask to verify. Gluten Free &amp; Dairy Free at WDW noted the Tuna Poke Bowl could be made gluten-free by omitting tuna and seaweed salad, which changes the item substantially.</p>
+            </div>
+          </div>
+          <p class="food-note">DFB called the Tuna Poke Bowl a new best and a strong lunch value.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Between China and Germany</div>
+          <h2>Refreshment Outpost</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Top 2 to Try</h3>
+              <ol><li>Seasonal Fruit Parfait with DOLE Whip Mango</li><li>Nigerian Beef Pie</li></ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Pick</h3>
+              <p>Seasonal Fruit Parfait with DOLE Whip Mango — listed gluten-free and plant-based.</p>
+            </div>
+          </div>
+          <p class="food-note">Useful lighter stop while walking World Showcase.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/" target="_blank" rel="noopener">View Official Photo/Menu ↗</a>
+        </article>
+      </section>
+
+      <section class="glass-card">
+        <h2>Sources used</h2>
+        <p class="small">
+          Based on 2026 menu data from Disney Parks Blog, Undercover Tourist, Disney Food Blog, WDW News Today,
+          Disney’s official allergy-friendly page, and Gluten Free & Dairy Free at WDW.
+        </p>
+      </section>
+    </section>
+
 
     <section id="trip" class="page">
       <p class="eyebrow">Trip Info</p>
