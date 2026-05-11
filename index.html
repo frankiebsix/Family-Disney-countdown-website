@@ -208,15 +208,7 @@
       padding: 11px 12px; font-weight: 850; font-family: inherit;
     }
     .attraction-select option { color: #082f66; background: white; }
-    .hunt-photo-wrap { margin: 14px 0 12px; border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.08); }
-    .hunt-photo { width: 100%; max-height: 260px; object-fit: cover; display: block; }
-    .hunt-photo-placeholder {
-      padding: 18px; border: 1px dashed rgba(255,255,255,.24); border-radius: 18px;
-      background: rgba(255,255,255,.07); color: rgba(255,255,255,.74); line-height: 1.55;
-      margin: 14px 0 12px;
-    }
-    .hunt-photo-credit { padding: 9px 12px; color: rgba(255,255,255,.68); font-size: .82rem; line-height: 1.4; }
-    .hunt-photo-credit a, .official-photo-link { color: var(--gold); font-weight: 800; text-decoration: none; }
+    .official-photo-link { color: var(--gold); font-weight: 800; text-decoration: none; }
     .hunt-status-row, .park-pill-row, .scoreboard, .today-stats { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
     .park-pill, .scoreboard-item, .today-stat, .found-badge, .confidence-pill {
       display: inline-flex; align-items: center; gap: 6px; padding: 7px 10px; border-radius: 999px;
@@ -281,6 +273,107 @@
     .weather-day { padding: 16px; box-shadow: 0 14px 32px rgba(0,0,0,.22); border-radius: 20px; }
     .weather-day strong { display: block; margin-bottom: 8px; color: var(--gold); }
     .weather-day span { display: block; color: rgba(255,255,255,.78); margin-top: 5px; font-size: .92rem; }
+
+    .map-tools {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 16px 0 18px;
+    }
+    .map-wrap {
+      position: relative;
+      min-height: 520px;
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(255,216,107,.16), transparent 18%),
+        radial-gradient(circle at 75% 32%, rgba(133,236,255,.14), transparent 22%),
+        radial-gradient(circle at 45% 78%, rgba(124,255,160,.12), transparent 24%),
+        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      box-shadow: inset 0 0 80px rgba(0,0,0,.18);
+    }
+    .map-bg-label {
+      position: absolute;
+      color: rgba(255,255,255,.18);
+      font-weight: 1000;
+      letter-spacing: -.06em;
+      font-size: clamp(2.4rem, 8vw, 7rem);
+      line-height: .85;
+      text-transform: uppercase;
+      pointer-events: none;
+      user-select: none;
+    }
+    .map-land {
+      position: absolute;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.75);
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      pointer-events: none;
+    }
+    .map-pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50% 50% 50% 8px;
+      rotate: -45deg;
+      background: var(--gold);
+      color: #1c1541;
+      box-shadow: 0 10px 28px rgba(0,0,0,.35), 0 0 0 4px rgba(255,216,107,.20);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-weight: 1000;
+      font-size: .78rem;
+      transition: transform .16s ease, box-shadow .16s ease;
+      z-index: 3;
+    }
+    .map-pin span {
+      rotate: 45deg;
+      display: inline-block;
+    }
+    .map-pin:hover,
+    .map-pin.active {
+      transform: translate(-50%, -50%) scale(1.14);
+      box-shadow: 0 14px 34px rgba(0,0,0,.42), 0 0 0 7px rgba(255,216,107,.28);
+      background: var(--green);
+    }
+    .map-popup {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      z-index: 4;
+      background: rgba(7,26,73,.88);
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: 22px;
+      padding: 18px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 18px 50px rgba(0,0,0,.32);
+    }
+    .map-popup h3 { margin-bottom: 6px; }
+    .map-popup p { margin-bottom: 8px; }
+    .map-note {
+      color: rgba(255,255,255,.68);
+      font-size: .93rem;
+      line-height: 1.55;
+      margin-top: 12px;
+    }
+    @media (max-width: 720px) {
+      .map-wrap { min-height: 560px; }
+      .map-land { font-size: .68rem; padding: 6px 8px; }
+      .map-pin { width: 30px; height: 30px; font-size: .72rem; }
+      .map-popup { left: 10px; right: 10px; bottom: 10px; }
+    }
+
     footer { width: min(1180px, calc(100% - 32px)); margin: 36px auto 26px; text-align: center; }
     canvas.confetti { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; }
 
@@ -430,7 +523,6 @@
           </div>
           <div id="hiddenMickeyTip"></div>
           <p id="hiddenMickeyCounter" class="small"></p>
-          <p class="small">Only clear reusable photos are embedded. For most of these, take your own photo during the trip and add it later.</p>
           <div class="hunt-actions">
             <button class="button secondary" onclick="prevHunt()">← Previous Hunt</button>
             <button class="button primary" onclick="nextHunt()">Next Hunt →</button>
@@ -460,6 +552,15 @@
           <div id="triviaCounter" class="small"></div>
         </article>
       </section>
+      <section class="glass-card">
+        <div class="card-icon" aria-hidden="true">🗺️</div>
+        <h2>Hidden Mickey Map View</h2>
+        <p>Pick a park and tap a pin. This is a simplified locator map, not an official Disney map, so the pins point to the right land/attraction area rather than exact GPS coordinates.</p>
+        <div class="map-tools" id="mapParkButtons"></div>
+        <div id="hiddenMickeyMap" class="map-wrap"></div>
+        <p class="map-note">Tip: Use the map to get close, then use the exact target clue on the Hidden Mickey card to find the real spot.</p>
+      </section>
+
       <section class="glass-card">
         <h2>Family Challenge</h2>
         <p>Each park day, try to find one Hidden Mickey in a queue, one in a ride scene, and one in a land walkway or shop. Keep score and crown a Hidden Mickey champion.</p>
@@ -558,8 +659,809 @@
       { title: "First Park Day", date: "2026-05-27T08:00:00", prettyDate: "May 27, 2026 • 8:00 AM", note: "Your first day in the parks." }
     ];
     const tripDays = [{"date": "2026-05-25", "title": "EPCOT Day for Some of the Family", "pills": ["EPCOT", "Family Group"], "areas": ["EPCOT"], "plan": ["Some family members plan to visit EPCOT.", "Good day to use the site’s Hidden Mickey hunt for World Showcase and ride queues.", "Florida Fresh booth ends today — try Blackened Fish Slider or Florida Strawberry Shortcake if interested."]}, {"date": "2026-05-27", "title": "Animal Kingdom Morning + EPCOT Evening", "pills": ["Animal Kingdom AM", "EPCOT PM", "Possible Magic Kingdom EEH"], "areas": ["Animal Kingdom", "EPCOT", "Magic Kingdom"], "plan": ["Start the morning at Animal Kingdom.", "Move to EPCOT in the evening.", "Possibly hop to Magic Kingdom for Extended Evening Hours if the schedule and energy level make sense."]}, {"date": "2026-05-28", "title": "Hollywood Studios Morning + Magic Kingdom Afternoon", "pills": ["Hollywood Studios AM", "Magic Kingdom PM"], "areas": ["Hollywood Studios", "Magic Kingdom"], "plan": ["Begin the day at Hollywood Studios.", "Shift to Magic Kingdom in the afternoon.", "Good candidate day for Lightning Lane strategy depending on ride priorities."]}, {"date": "2026-05-29", "title": "Hollywood Studios Day", "pills": ["Hollywood Studios"], "areas": ["Hollywood Studios"], "plan": ["Hollywood Studios is the main park plan.", "Could focus on Toy Story Land, Runaway Railway, Star Wars: Galaxy’s Edge, and any missed shows.", "Use the Hidden Mickey hunt list for Tower of Terror, Toy Story Mania, Runaway Railway, and Galaxy’s Edge."]}];
-    const hiddenMickeyHunts = [{"area": "Magic Kingdom", "land": "Frontierland", "attraction": "Big Thunder Mountain Railroad", "location": "Returning toward the loading station, right side, in mining debris", "clue": "As the train slows and heads back into the station, look to the right for three rusty gears arranged as Mickey.", "confidence": "High", "sourceNote": "Reported by multiple Hidden Mickey guides."}, {"area": "Magic Kingdom", "land": "Liberty Square", "attraction": "Haunted Mansion", "location": "Ballroom banquet table", "clue": "When your Doom Buggy looks down into the ballroom, watch the banquet table for a dinner plate flanked by two saucers.", "confidence": "High", "sourceNote": "Classic reported Hidden Mickey."}, {"area": "Magic Kingdom", "land": "Liberty Square", "attraction": "Haunted Mansion", "location": "Graveyard scene, Grim Reaper figure", "clue": "In the graveyard scene, look at the Grim Reaper’s left hand; the fingers are reported to form a Mickey outline.", "confidence": "Medium-high", "sourceNote": "Reported; view can be quick."}, {"area": "Magic Kingdom", "land": "Liberty Square", "attraction": "Haunted Mansion", "location": "Interactive queue crypts", "clue": "In the outdoor interactive queue, inspect the carved crypt details and tombstone designs instead of scanning randomly.", "confidence": "Medium", "sourceNote": "Reported; may vary after refurbishments."}, {"area": "Magic Kingdom", "land": "Adventureland", "attraction": "Jungle Cruise", "location": "Temple scene", "clue": "Inside the temple scene, look for three plates arranged in the classic Mickey shape.", "confidence": "High", "sourceNote": "Specific scene clue."}, {"area": "Magic Kingdom", "land": "Adventureland", "attraction": "Jungle Cruise", "location": "Outer wooden dock beside the loading area", "clue": "As boats approach the loading dock, look along the right side of the outer dock for a rope coiled like Mickey.", "confidence": "Medium-high", "sourceNote": "Rope placement can change."}, {"area": "Magic Kingdom", "land": "Fantasyland", "attraction": "Under the Sea – Journey of The Little Mermaid", "location": "Cave entrance before boarding", "clue": "When you enter the cave to board, slow down and look in the cave detail for a small Mickey shape.", "confidence": "High", "sourceNote": "Specific queue clue."}, {"area": "Magic Kingdom", "land": "Fantasyland", "attraction": "Under the Sea – Journey of The Little Mermaid", "location": "Outdoor queue rockwork; November 18 sunlight Mickey", "clue": "On Mickey’s birthday, mid-morning sunlight through the rockwork can cast a Mickey-shaped shadow on the wall.", "confidence": "Seasonal", "sourceNote": "Date/time/weather dependent."}, {"area": "Magic Kingdom", "land": "Fantasyland", "attraction": "Under the Sea – Journey of The Little Mermaid", "location": "Exit cloud mural", "clue": "As you exit, slow down and scan the cloud mural for a Mickey shape.", "confidence": "Medium-high", "sourceNote": "Specific exit clue."}, {"area": "Magic Kingdom", "land": "Fantasyland", "attraction": "Cinderella Castle", "location": "Mosaic walkway, panel with the stepsisters", "clue": "Walk through the castle mosaic walkway and inspect the jewels/background tiles around the stepsisters panel.", "confidence": "Medium-high", "sourceNote": "Classic reported castle clue."}, {"area": "Magic Kingdom", "land": "Main Street, U.S.A.", "attraction": "Main Street Confectionery", "location": "Candy-making room, trim of the white cupboards", "clue": "Inside the candy-making room, look at the trim on the white cupboards.", "confidence": "Medium-high", "sourceNote": "Reported shop clue."}, {"area": "Magic Kingdom", "land": "Tomorrowland", "attraction": "Buzz Lightyear’s Space Ranger Spin", "location": "Queue mural/planet graphics", "clue": "In the queue mural, scan the colored planets and round background graphics for a three-circle grouping.", "confidence": "Medium", "sourceNote": "Queue details may change."}, {"area": "Magic Kingdom", "land": "Tomorrowland", "attraction": "Space Mountain", "location": "Queue space panels", "clue": "In the queue, look at circular wall panels and monitors for three-circle arrangements rather than random wall art.", "confidence": "Medium", "sourceNote": "Reported general-but-specific queue target."}, {"area": "Magic Kingdom", "land": "Fantasyland", "attraction": "Seven Dwarfs Mine Train", "location": "Interactive gem queue", "clue": "At the gem-sorting area, inspect the gem groupings and wooden barrels for a three-circle shape.", "confidence": "Medium", "sourceNote": "Queue target; not guaranteed."}, {"area": "EPCOT", "land": "World Celebration", "attraction": "Spaceship Earth", "location": "Futuristic electronics scene, desk eraser", "clue": "In the future/electronics area, look on the desk for an eraser-shaped Hidden Mickey.", "confidence": "High", "sourceNote": "Specific ride-scene clue."}, {"area": "EPCOT", "land": "World Celebration", "attraction": "Spaceship Earth", "location": "15th-century art/fruit scene", "clue": "In the 15th-century artist scene, look at the art made of fruits for a Mickey grouping.", "confidence": "High", "sourceNote": "Specific ride-scene clue."}, {"area": "EPCOT", "land": "World Nature", "attraction": "Living with the Land", "location": "Boat loading mural, lower area across from boats", "clue": "Before or just as you board, look beyond the boats at the lower section of the mural for three circles.", "confidence": "High", "sourceNote": "Specific loading-area clue."}, {"area": "EPCOT", "land": "World Nature", "attraction": "Living with the Land", "location": "Greenhouse produce arrangements", "clue": "As the boat passes the working greenhouses, watch for round produce arranged as Mickey shapes.", "confidence": "Seasonal", "sourceNote": "Planting arrangements can change.", "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Epcot%20-%20Mickey%20pumpkins%20by%20pgoings.jpg", "photoCredit": "Photo: Paul Goings / pgoings, Wikimedia Commons", "licenseText": "CC BY 2.0", "licenseUrl": "https://commons.wikimedia.org/wiki/File:Epcot_-_Mickey_pumpkins_by_pgoings.jpg"}, {"area": "EPCOT", "land": "World Nature", "attraction": "Journey of Water, Inspired by Moana", "location": "Land exhibit, low orange vase after rock archway", "clue": "After passing under the rock archway, look left at the low rock wall; near the bottom of an orange vase are tiny holes forming Mickey.", "confidence": "High", "sourceNote": "Specific newer EPCOT clue."}, {"area": "EPCOT", "land": "World Nature", "attraction": "Journey of Water, Inspired by Moana", "location": "Ocean exhibit, rock wall behind fence near water jets", "clue": "In the Ocean area, look left and high on the rock wall behind the fence, in front of the interactive water wall.", "confidence": "High", "sourceNote": "Specific newer EPCOT clue."}, {"area": "EPCOT", "land": "World Showcase", "attraction": "Gran Fiesta Tour", "location": "Final Mexico city/map scene, platform-base tiles on left side of boat", "clue": "In the final scene, look low on the left side of your boat; Mickeys are embedded on the platform-base tiles.", "confidence": "High", "sourceNote": "Specific ride-scene clue."}, {"area": "EPCOT", "land": "World Showcase", "attraction": "Gran Fiesta Tour", "location": "End of ride, building/window area", "clue": "Near the end of the ride, look at the city/building window area for a small Mickey shape.", "confidence": "Medium-high", "sourceNote": "Reported by several park fans."}, {"area": "EPCOT", "land": "World Discovery", "attraction": "Mission: SPACE", "location": "Gift shop mural behind cash register", "clue": "In the mural behind the gift shop register, look under Minnie’s left foot, behind the blue X-2 spaceship thrusters, and low on the moon.", "confidence": "High", "sourceNote": "Specific mural clue."}, {"area": "EPCOT", "land": "World Celebration", "attraction": "Meet Mickey & Friends", "location": "Rear wall mural in central Goofy greeting section", "clue": "In the central greeting section, look at the lower middle of the rear mural near the short green wall for three orange flowers.", "confidence": "High", "sourceNote": "Specific meet-and-greet clue."}, {"area": "EPCOT", "land": "World Showcase", "attraction": "Morocco Pavilion", "location": "Marketplace tilework", "clue": "In the Morocco marketplace, inspect the geometric tile patterns for a three-circle Mickey hidden in the design.", "confidence": "Medium", "sourceNote": "Tilework target; can be subtle.", "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/HiddenMickeyEpcot.JPG", "photoCredit": "Photo: UpstateNYer / Matt H. Wade, Wikimedia Commons", "licenseText": "Wikimedia Commons file page", "licenseUrl": "https://commons.wikimedia.org/wiki/File:HiddenMickeyEpcot.JPG"}, {"area": "EPCOT", "land": "World Showcase", "attraction": "Canada Pavilion", "location": "Victoria Gardens rockwork/railings", "clue": "Walk the garden path and inspect the rockwork and railing details for three-circle groupings.", "confidence": "Medium", "sourceNote": "Reported area clue."}, {"area": "Hollywood Studios", "land": "Sunset Boulevard", "attraction": "Tower of Terror", "location": "Library sheet music", "clue": "In the library pre-show room, inspect the sheet music for the Mickey reference/notes arrangement.", "confidence": "High", "sourceNote": "Classic specific Tower clue."}, {"area": "Hollywood Studios", "land": "Sunset Boulevard", "attraction": "Tower of Terror", "location": "Boiler room, after the queue splits", "clue": "After the queue splits in the boiler room, look along the wall for a water-stain Hidden Mickey.", "confidence": "High", "sourceNote": "Classic specific Tower clue."}, {"area": "Hollywood Studios", "land": "Sunset Boulevard", "attraction": "Tower of Terror", "location": "Final drop doors, night sky/stars", "clue": "Just before the final drop, watch the stars as the doors open; a swirl forms a Mickey briefly.", "confidence": "High but hard to catch", "sourceNote": "Very quick view."}, {"area": "Hollywood Studios", "land": "Sunset Boulevard", "attraction": "Tower of Terror", "location": "Library video / corridor vision", "clue": "Watch for the little girl holding a Mickey Mouse plush in the pre-show video and reappearing vision.", "confidence": "High", "sourceNote": "Specific video clue."}, {"area": "Hollywood Studios", "land": "Sunset Boulevard", "attraction": "Tower of Terror", "location": "Lobby balcony designs", "clue": "Before entering the library, look up toward the lobby balcony designs for a row of Mickey shapes.", "confidence": "Medium-high", "sourceNote": "Specific lobby clue."}, {"area": "Hollywood Studios", "land": "Echo Lake", "attraction": "Star Tours", "location": "Queue area, G2 robot worker", "clue": "In the queue, look at G2 the robot worker; he is reported to be wearing a Mickey watch.", "confidence": "Medium-high", "sourceNote": "Specific queue clue."}, {"area": "Hollywood Studios", "land": "Echo Lake", "attraction": "Star Tours", "location": "Pre-show video", "clue": "In the pre-show video, watch for an Ewok carrying a Mickey plush.", "confidence": "Medium-high", "sourceNote": "Specific video clue."}, {"area": "Hollywood Studios", "land": "Toy Story Land", "attraction": "Toy Story Mania", "location": "Past large U.S.A. map, low left wall below green dinosaur and red fish", "clue": "After the large U.S.A. map, look low on the left wall behind the handrails, below the green dinosaur and red fish.", "confidence": "High", "sourceNote": "Very specific queue clue."}, {"area": "Hollywood Studios", "land": "Toy Story Land", "attraction": "Toy Story Mania", "location": "Entrance queue, Critter Pop-Outs board on right side", "clue": "On the right side of the queue, find the Critter Pop-Outs board; behind the beaver cutout is a dark red sideways Mickey on a fireball.", "confidence": "High", "sourceNote": "Very specific queue clue."}, {"area": "Hollywood Studios", "land": "Toy Story Land", "attraction": "Alien Swirling Saucers", "location": "Queue mural/control-panel area", "clue": "In the queue, scan the control mural; three buttons form a Hidden Mickey.", "confidence": "Medium-high", "sourceNote": "Specific queue clue."}, {"area": "Hollywood Studios", "land": "Toy Story Land", "attraction": "Slinky Dog Dash", "location": "Queue, Squeaky Penguin box", "clue": "In the Slinky Dog Dash queue, look for the Squeaky Penguin box and inspect it for a Hidden Mickey.", "confidence": "Medium-high", "sourceNote": "Specific queue clue."}, {"area": "Hollywood Studios", "land": "Galaxy’s Edge", "attraction": "Millennium Falcon: Smugglers Run", "location": "Engine room corridor", "clue": "In the Falcon engine-room corridor, inspect round dials, pipe fittings, and control-panel clusters for a classic three-circle shape.", "confidence": "Medium", "sourceNote": "Specific area, but not guaranteed."}, {"area": "Animal Kingdom", "land": "DinoLand U.S.A.", "attraction": "DINOSAUR", "location": "Loading/lab area, lower-left whiteboard on left-hand side as Time Rover departs", "clue": "As your Time Rover leaves, look left at the lab whiteboard; a small blue Mickey is drawn low on it.", "confidence": "High", "sourceNote": "Very specific ride clue."}, {"area": "Animal Kingdom", "land": "Asia", "attraction": "Maharajah Jungle Trek", "location": "First archway near tiger habitat, left mural", "clue": "Inside the first archway near the tiger habitat, look at the left mural for three leaves forming Mickey.", "confidence": "High", "sourceNote": "Specific walking-trail clue."}, {"area": "Animal Kingdom", "land": "Asia", "attraction": "Maharajah Jungle Trek", "location": "Past second archway, ceiling/cloud mural", "clue": "Continue past the second arch and look up at the painted clouds; one cloud forms Mickey.", "confidence": "High", "sourceNote": "Specific walking-trail clue."}, {"area": "Animal Kingdom", "land": "Asia", "attraction": "Maharajah Jungle Trek", "location": "Before aviary, carved men panel", "clue": "Before entering the aviary, find the carvings of men; one man’s left earring forms a classic Mickey.", "confidence": "Medium-high", "sourceNote": "Specific walking-trail clue."}, {"area": "Animal Kingdom", "land": "DinoLand U.S.A.", "attraction": "The Boneyard", "location": "Dig/play area, fan with two hard hats", "clue": "Look for a fan and two hard hats arranged together to form Mickey.", "confidence": "Medium-high", "sourceNote": "Props can move/change."}, {"area": "Animal Kingdom", "land": "DinoLand U.S.A.", "attraction": "Chester & Hester’s Dino-Rama", "location": "Near TriceraTop Spin, dinosaur holding the Dino-Rama sign", "clue": "Stand under the sign and inspect the dinosaur’s wrist for the Mickey.", "confidence": "Medium-high", "sourceNote": "May change with area construction/closures."}, {"area": "Animal Kingdom", "land": "Pandora", "attraction": "Avatar Flight of Passage", "location": "Standby queue ACE lab, researcher’s note paper near circular lab", "clue": "Near the end of the walk around the circular lab, inspect the researcher’s drawings; small black circles along the upper-left border form Mickey sideways.", "confidence": "High", "sourceNote": "Very specific queue clue."}, {"area": "Animal Kingdom", "land": "Pandora", "attraction": "Avatar Flight of Passage", "location": "ACE lab countertop/specimen jars", "clue": "Inside the ACE lab, look at the specimen jars and bottle caps on the countertop for classic Mickey groupings.", "confidence": "Medium-high", "sourceNote": "Specific lab target."}, {"area": "Animal Kingdom", "land": "Pandora", "attraction": "Pandora pathways", "location": "First side path branching from main Pandora walkway; dead tree above fence", "clue": "At the first branch off the main walkway, face the dead tree on the right; halfway up the left mushroom cluster, three small mushrooms form Mickey.", "confidence": "High", "sourceNote": "Very specific land clue."}, {"area": "Animal Kingdom", "land": "Discovery Island", "attraction": "Tree of Life", "location": "Rear of trunk, hippo carving", "clue": "From the walkway connecting Africa and Asia, view the rear of the Tree of Life; above the hippo’s eye is an upside-down Mickey.", "confidence": "Medium-high", "sourceNote": "Specific Tree of Life clue.", "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Animal%20Kingdom%20banner%20Tree%20of%20Life.jpg", "photoCredit": "Photo: Vox Efx, Wikimedia Commons", "licenseText": "CC BY 2.0", "licenseUrl": "https://commons.wikimedia.org/wiki/File:Animal_Kingdom_banner_Tree_of_Life.jpg"}];
-    const disneyTrivia = [{"question": "What year did Walt Disney World officially open?", "answer": "1971."}, {"question": "Which Walt Disney World park opened first?", "answer": "Magic Kingdom."}, {"question": "Which EPCOT icon is a geodesic sphere?", "answer": "Spaceship Earth."}, {"question": "Which park is home to the Tree of Life?", "answer": "Disney’s Animal Kingdom."}, {"question": "Which park is home to Hollywood Boulevard?", "answer": "Disney’s Hollywood Studios."}, {"question": "Which Magic Kingdom land has Pirates of the Caribbean?", "answer": "Adventureland."}, {"question": "Which Magic Kingdom land has Big Thunder Mountain Railroad?", "answer": "Frontierland."}, {"question": "Which Magic Kingdom attraction features 999 happy haunts?", "answer": "The Haunted Mansion."}, {"question": "Which EPCOT attraction takes guests through greenhouses?", "answer": "Living with the Land."}, {"question": "Which EPCOT pavilion has Frozen Ever After?", "answer": "Norway."}, {"question": "Which EPCOT pavilion has Remy’s Ratatouille Adventure?", "answer": "France."}, {"question": "Which EPCOT pavilion has Le Cellier Steakhouse?", "answer": "Canada."}, {"question": "Which EPCOT country pavilion has maple popcorn?", "answer": "Canada Pavilion."}, {"question": "Which Hollywood Studios ride is inside the Chinese Theatre?", "answer": "Mickey & Minnie’s Runaway Railway."}, {"question": "Which Hollywood Studios land is themed to Andy’s backyard?", "answer": "Toy Story Land."}, {"question": "Which Hollywood Studios attraction has a 13-story haunted hotel theme?", "answer": "The Twilight Zone Tower of Terror."}, {"question": "Which Hollywood Studios land contains Millennium Falcon: Smugglers Run?", "answer": "Star Wars: Galaxy’s Edge."}, {"question": "Which Animal Kingdom ride takes guests on a safari through Harambe Wildlife Reserve?", "answer": "Kilimanjaro Safaris."}, {"question": "Which Animal Kingdom coaster is themed to the Himalayas?", "answer": "Expedition Everest."}, {"question": "Which Animal Kingdom land contains Pandora?", "answer": "Pandora – The World of Avatar."}, {"question": "Which Disney park opened on Earth Day in 1998?", "answer": "Disney’s Animal Kingdom."}, {"question": "Which Disney resort is themed to the South Pacific?", "answer": "Disney’s Polynesian Village Resort."}, {"question": "Which transportation system connects Magic Kingdom with nearby monorail resorts?", "answer": "The Walt Disney World Monorail."}, {"question": "Which aerial gondola system serves EPCOT and Hollywood Studios area resorts?", "answer": "Disney Skyliner."}, {"question": "Which water park has a snowy ski resort theme?", "answer": "Blizzard Beach."}, {"question": "Who is Mickey Mouse’s girlfriend?", "answer": "Minnie Mouse."}, {"question": "Who is Mickey Mouse’s dog?", "answer": "Pluto."}, {"question": "What was Mickey Mouse’s first synchronized sound cartoon?", "answer": "Steamboat Willie."}, {"question": "What year did Steamboat Willie debut?", "answer": "1928."}, {"question": "Who is the fairy in Peter Pan?", "answer": "Tinker Bell."}, {"question": "Who is the villain in The Little Mermaid?", "answer": "Ursula."}, {"question": "Which princess loses a glass slipper?", "answer": "Cinderella."}, {"question": "Which Frozen character sings 'Let It Go'?", "answer": "Elsa."}, {"question": "Which Pixar movie features Woody and Buzz Lightyear?", "answer": "Toy Story."}, {"question": "What Pixar movie features a rat who cooks?", "answer": "Ratatouille."}, {"question": "What Pixar movie is set in the Land of the Dead?", "answer": "Coco."}, {"question": "Which Disney movie features the song 'Hakuna Matata'?", "answer": "The Lion King."}, {"question": "Which Disney movie features the song 'A Whole New World'?", "answer": "Aladdin."}, {"question": "Which Disney movie features the Madrigal family?", "answer": "Encanto."}];
+    const hiddenMickeyHunts = [{"area": "Magic Kingdom", "land": "Frontierland", "attraction": "Big Thunder Mountain Railroad", "location": "Returning toward the loading station, right side, in mining debris", "clue": "As the train slows and heads back into the station, look to the right for three rusty gears arranged as Mickey.", "confidence": "High", "sourceNote": "Reported by multiple Hidden Mickey guides."}, {"area": "Magic Kingdom", "land": "Liberty Square", "attraction": "Haunted Mansion", "location": "Ballroom banquet table", "clue": "When your Doom Buggy looks down into the ballroom, watch the banquet table for a dinner plate flanked by two saucers.", "confidence": "High", "sourceNote": "Classic reported Hidden Mickey."}, {"area": "Magic Kingdom", "land": "Liberty Square", "attraction": "Haunted Mansion", "location": "Graveyard scene, Grim Reaper figure", "clue": "In the graveyard scene, look at the Grim Reaper’s left hand; the fingers are reported to form a Mickey outline.", "confidence": "Medium-high", "sourceNote": "Reported; view can be quick."}, {"area": "Magic Kingdom", "land": "Liberty Square", "attraction": "Haunted Mansion", "location": "Interactive queue crypts", "clue": "In the outdoor interactive queue, inspect the carved crypt details and tombstone designs instead of scanning randomly.", "confidence": "Medium", "sourceNote": "Reported; may vary after refurbishments."}, {"area": "Magic Kingdom", "land": "Adventureland", "attraction": "Jungle Cruise", "location": "Temple scene", "clue": "Inside the temple scene, look for three plates arranged in the classic Mickey shape.", "confidence": "High", "sourceNote": "Specific scene clue."}, {"area": "Magic Kingdom", "land": "Adventureland", "attraction": "Jungle Cruise", "location": "Outer wooden dock beside the loading area", "clue": "As boats approach the loading dock, look along the right side of the outer dock for a rope coiled like Mickey.", "confidence": "Medium-high", "sourceNote": "Rope placement can change."}, {"area": "Magic Kingdom", "land": "Fantasyland", "attraction": "Under the Sea – Journey of The Little Mermaid", "location": "Cave entrance before boarding", "clue": "When you enter the cave to board, slow down and look in the cave detail for a small Mickey shape.", "confidence": "High", "sourceNote": "Specific queue clue."}, {"area": "Magic Kingdom", "land": "Fantasyland", "attraction": "Under the Sea – Journey of The Little Mermaid", "location": "Outdoor queue rockwork; November 18 sunlight Mickey", "clue": "On Mickey’s birthday, mid-morning sunlight through the rockwork can cast a Mickey-shaped shadow on the wall.", "confidence": "Seasonal", "sourceNote": "Date/time/weather dependent."}, {"area": "Magic Kingdom", "land": "Fantasyland", "attraction": "Under the Sea – Journey of The Little Mermaid", "location": "Exit cloud mural", "clue": "As you exit, slow down and scan the cloud mural for a Mickey shape.", "confidence": "Medium-high", "sourceNote": "Specific exit clue."}, {"area": "Magic Kingdom", "land": "Fantasyland", "attraction": "Cinderella Castle", "location": "Mosaic walkway, panel with the stepsisters", "clue": "Walk through the castle mosaic walkway and inspect the jewels/background tiles around the stepsisters panel.", "confidence": "Medium-high", "sourceNote": "Classic reported castle clue."}, {"area": "Magic Kingdom", "land": "Main Street, U.S.A.", "attraction": "Main Street Confectionery", "location": "Candy-making room, trim of the white cupboards", "clue": "Inside the candy-making room, look at the trim on the white cupboards.", "confidence": "Medium-high", "sourceNote": "Reported shop clue."}, {"area": "Magic Kingdom", "land": "Tomorrowland", "attraction": "Buzz Lightyear’s Space Ranger Spin", "location": "Queue mural/planet graphics", "clue": "In the queue mural, scan the colored planets and round background graphics for a three-circle grouping.", "confidence": "Medium", "sourceNote": "Queue details may change."}, {"area": "Magic Kingdom", "land": "Tomorrowland", "attraction": "Space Mountain", "location": "Queue space panels", "clue": "In the queue, look at circular wall panels and monitors for three-circle arrangements rather than random wall art.", "confidence": "Medium", "sourceNote": "Reported general-but-specific queue target."}, {"area": "Magic Kingdom", "land": "Fantasyland", "attraction": "Seven Dwarfs Mine Train", "location": "Interactive gem queue", "clue": "At the gem-sorting area, inspect the gem groupings and wooden barrels for a three-circle shape.", "confidence": "Medium", "sourceNote": "Queue target; not guaranteed."}, {"area": "EPCOT", "land": "World Celebration", "attraction": "Spaceship Earth", "location": "Futuristic electronics scene, desk eraser", "clue": "In the future/electronics area, look on the desk for an eraser-shaped Hidden Mickey.", "confidence": "High", "sourceNote": "Specific ride-scene clue."}, {"area": "EPCOT", "land": "World Celebration", "attraction": "Spaceship Earth", "location": "15th-century art/fruit scene", "clue": "In the 15th-century artist scene, look at the art made of fruits for a Mickey grouping.", "confidence": "High", "sourceNote": "Specific ride-scene clue."}, {"area": "EPCOT", "land": "World Nature", "attraction": "Living with the Land", "location": "Boat loading mural, lower area across from boats", "clue": "Before or just as you board, look beyond the boats at the lower section of the mural for three circles.", "confidence": "High", "sourceNote": "Specific loading-area clue."}, {"area": "EPCOT", "land": "World Nature", "attraction": "Living with the Land", "location": "Greenhouse produce arrangements", "clue": "As the boat passes the working greenhouses, watch for round produce arranged as Mickey shapes.", "confidence": "Seasonal", "sourceNote": "Planting arrangements can change."}, {"area": "EPCOT", "land": "World Nature", "attraction": "Journey of Water, Inspired by Moana", "location": "Land exhibit, low orange vase after rock archway", "clue": "After passing under the rock archway, look left at the low rock wall; near the bottom of an orange vase are tiny holes forming Mickey.", "confidence": "High", "sourceNote": "Specific newer EPCOT clue."}, {"area": "EPCOT", "land": "World Nature", "attraction": "Journey of Water, Inspired by Moana", "location": "Ocean exhibit, rock wall behind fence near water jets", "clue": "In the Ocean area, look left and high on the rock wall behind the fence, in front of the interactive water wall.", "confidence": "High", "sourceNote": "Specific newer EPCOT clue."}, {"area": "EPCOT", "land": "World Showcase", "attraction": "Gran Fiesta Tour", "location": "Final Mexico city/map scene, platform-base tiles on left side of boat", "clue": "In the final scene, look low on the left side of your boat; Mickeys are embedded on the platform-base tiles.", "confidence": "High", "sourceNote": "Specific ride-scene clue."}, {"area": "EPCOT", "land": "World Showcase", "attraction": "Gran Fiesta Tour", "location": "End of ride, building/window area", "clue": "Near the end of the ride, look at the city/building window area for a small Mickey shape.", "confidence": "Medium-high", "sourceNote": "Reported by several park fans."}, {"area": "EPCOT", "land": "World Discovery", "attraction": "Mission: SPACE", "location": "Gift shop mural behind cash register", "clue": "In the mural behind the gift shop register, look under Minnie’s left foot, behind the blue X-2 spaceship thrusters, and low on the moon.", "confidence": "High", "sourceNote": "Specific mural clue."}, {"area": "EPCOT", "land": "World Celebration", "attraction": "Meet Mickey & Friends", "location": "Rear wall mural in central Goofy greeting section", "clue": "In the central greeting section, look at the lower middle of the rear mural near the short green wall for three orange flowers.", "confidence": "High", "sourceNote": "Specific meet-and-greet clue."}, {"area": "EPCOT", "land": "World Showcase", "attraction": "Morocco Pavilion", "location": "Marketplace tilework", "clue": "In the Morocco marketplace, inspect the geometric tile patterns for a three-circle Mickey hidden in the design.", "confidence": "Medium", "sourceNote": "Tilework target; can be subtle."}, {"area": "EPCOT", "land": "World Showcase", "attraction": "Canada Pavilion", "location": "Victoria Gardens rockwork/railings", "clue": "Walk the garden path and inspect the rockwork and railing details for three-circle groupings.", "confidence": "Medium", "sourceNote": "Reported area clue."}, {"area": "Hollywood Studios", "land": "Sunset Boulevard", "attraction": "Tower of Terror", "location": "Library sheet music", "clue": "In the library pre-show room, inspect the sheet music for the Mickey reference/notes arrangement.", "confidence": "High", "sourceNote": "Classic specific Tower clue."}, {"area": "Hollywood Studios", "land": "Sunset Boulevard", "attraction": "Tower of Terror", "location": "Boiler room, after the queue splits", "clue": "After the queue splits in the boiler room, look along the wall for a water-stain Hidden Mickey.", "confidence": "High", "sourceNote": "Classic specific Tower clue."}, {"area": "Hollywood Studios", "land": "Sunset Boulevard", "attraction": "Tower of Terror", "location": "Final drop doors, night sky/stars", "clue": "Just before the final drop, watch the stars as the doors open; a swirl forms a Mickey briefly.", "confidence": "High but hard to catch", "sourceNote": "Very quick view."}, {"area": "Hollywood Studios", "land": "Sunset Boulevard", "attraction": "Tower of Terror", "location": "Library video / corridor vision", "clue": "Watch for the little girl holding a Mickey Mouse plush in the pre-show video and reappearing vision.", "confidence": "High", "sourceNote": "Specific video clue."}, {"area": "Hollywood Studios", "land": "Sunset Boulevard", "attraction": "Tower of Terror", "location": "Lobby balcony designs", "clue": "Before entering the library, look up toward the lobby balcony designs for a row of Mickey shapes.", "confidence": "Medium-high", "sourceNote": "Specific lobby clue."}, {"area": "Hollywood Studios", "land": "Echo Lake", "attraction": "Star Tours", "location": "Queue area, G2 robot worker", "clue": "In the queue, look at G2 the robot worker; he is reported to be wearing a Mickey watch.", "confidence": "Medium-high", "sourceNote": "Specific queue clue."}, {"area": "Hollywood Studios", "land": "Echo Lake", "attraction": "Star Tours", "location": "Pre-show video", "clue": "In the pre-show video, watch for an Ewok carrying a Mickey plush.", "confidence": "Medium-high", "sourceNote": "Specific video clue."}, {"area": "Hollywood Studios", "land": "Toy Story Land", "attraction": "Toy Story Mania", "location": "Past large U.S.A. map, low left wall below green dinosaur and red fish", "clue": "After the large U.S.A. map, look low on the left wall behind the handrails, below the green dinosaur and red fish.", "confidence": "High", "sourceNote": "Very specific queue clue."}, {"area": "Hollywood Studios", "land": "Toy Story Land", "attraction": "Toy Story Mania", "location": "Entrance queue, Critter Pop-Outs board on right side", "clue": "On the right side of the queue, find the Critter Pop-Outs board; behind the beaver cutout is a dark red sideways Mickey on a fireball.", "confidence": "High", "sourceNote": "Very specific queue clue."}, {"area": "Hollywood Studios", "land": "Toy Story Land", "attraction": "Alien Swirling Saucers", "location": "Queue mural/control-panel area", "clue": "In the queue, scan the control mural; three buttons form a Hidden Mickey.", "confidence": "Medium-high", "sourceNote": "Specific queue clue."}, {"area": "Hollywood Studios", "land": "Toy Story Land", "attraction": "Slinky Dog Dash", "location": "Queue, Squeaky Penguin box", "clue": "In the Slinky Dog Dash queue, look for the Squeaky Penguin box and inspect it for a Hidden Mickey.", "confidence": "Medium-high", "sourceNote": "Specific queue clue."}, {"area": "Hollywood Studios", "land": "Galaxy’s Edge", "attraction": "Millennium Falcon: Smugglers Run", "location": "Engine room corridor", "clue": "In the Falcon engine-room corridor, inspect round dials, pipe fittings, and control-panel clusters for a classic three-circle shape.", "confidence": "Medium", "sourceNote": "Specific area, but not guaranteed."}, {"area": "Animal Kingdom", "land": "DinoLand U.S.A.", "attraction": "DINOSAUR", "location": "Loading/lab area, lower-left whiteboard on left-hand side as Time Rover departs", "clue": "As your Time Rover leaves, look left at the lab whiteboard; a small blue Mickey is drawn low on it.", "confidence": "High", "sourceNote": "Very specific ride clue."}, {"area": "Animal Kingdom", "land": "Asia", "attraction": "Maharajah Jungle Trek", "location": "First archway near tiger habitat, left mural", "clue": "Inside the first archway near the tiger habitat, look at the left mural for three leaves forming Mickey.", "confidence": "High", "sourceNote": "Specific walking-trail clue."}, {"area": "Animal Kingdom", "land": "Asia", "attraction": "Maharajah Jungle Trek", "location": "Past second archway, ceiling/cloud mural", "clue": "Continue past the second arch and look up at the painted clouds; one cloud forms Mickey.", "confidence": "High", "sourceNote": "Specific walking-trail clue."}, {"area": "Animal Kingdom", "land": "Asia", "attraction": "Maharajah Jungle Trek", "location": "Before aviary, carved men panel", "clue": "Before entering the aviary, find the carvings of men; one man’s left earring forms a classic Mickey.", "confidence": "Medium-high", "sourceNote": "Specific walking-trail clue."}, {"area": "Animal Kingdom", "land": "DinoLand U.S.A.", "attraction": "The Boneyard", "location": "Dig/play area, fan with two hard hats", "clue": "Look for a fan and two hard hats arranged together to form Mickey.", "confidence": "Medium-high", "sourceNote": "Props can move/change."}, {"area": "Animal Kingdom", "land": "DinoLand U.S.A.", "attraction": "Chester & Hester’s Dino-Rama", "location": "Near TriceraTop Spin, dinosaur holding the Dino-Rama sign", "clue": "Stand under the sign and inspect the dinosaur’s wrist for the Mickey.", "confidence": "Medium-high", "sourceNote": "May change with area construction/closures."}, {"area": "Animal Kingdom", "land": "Pandora", "attraction": "Avatar Flight of Passage", "location": "Standby queue ACE lab, researcher’s note paper near circular lab", "clue": "Near the end of the walk around the circular lab, inspect the researcher’s drawings; small black circles along the upper-left border form Mickey sideways.", "confidence": "High", "sourceNote": "Very specific queue clue."}, {"area": "Animal Kingdom", "land": "Pandora", "attraction": "Avatar Flight of Passage", "location": "ACE lab countertop/specimen jars", "clue": "Inside the ACE lab, look at the specimen jars and bottle caps on the countertop for classic Mickey groupings.", "confidence": "Medium-high", "sourceNote": "Specific lab target."}, {"area": "Animal Kingdom", "land": "Pandora", "attraction": "Pandora pathways", "location": "First side path branching from main Pandora walkway; dead tree above fence", "clue": "At the first branch off the main walkway, face the dead tree on the right; halfway up the left mushroom cluster, three small mushrooms form Mickey.", "confidence": "High", "sourceNote": "Very specific land clue."}, {"area": "Animal Kingdom", "land": "Discovery Island", "attraction": "Tree of Life", "location": "Rear of trunk, hippo carving", "clue": "From the walkway connecting Africa and Asia, view the rear of the Tree of Life; above the hippo’s eye is an upside-down Mickey.", "confidence": "Medium-high", "sourceNote": "Specific Tree of Life clue."}];
+    const disneyTrivia = [
+      {
+            "question": "What year did Walt Disney World officially open?",
+            "answer": "1971."
+      },
+      {
+            "question": "Which Walt Disney World park opened first?",
+            "answer": "Magic Kingdom."
+      },
+      {
+            "question": "Which EPCOT icon is a geodesic sphere?",
+            "answer": "Spaceship Earth."
+      },
+      {
+            "question": "Which park is home to the Tree of Life?",
+            "answer": "Disney’s Animal Kingdom."
+      },
+      {
+            "question": "Which park is home to Hollywood Boulevard?",
+            "answer": "Disney’s Hollywood Studios."
+      },
+      {
+            "question": "Which resort has a monorail track running through its main building?",
+            "answer": "Disney’s Contemporary Resort."
+      },
+      {
+            "question": "Which Magic Kingdom land has Pirates of the Caribbean?",
+            "answer": "Adventureland."
+      },
+      {
+            "question": "Which Magic Kingdom land has Big Thunder Mountain Railroad?",
+            "answer": "Frontierland."
+      },
+      {
+            "question": "Which Magic Kingdom land has Space Mountain?",
+            "answer": "Tomorrowland."
+      },
+      {
+            "question": "Which Magic Kingdom land has Peter Pan’s Flight?",
+            "answer": "Fantasyland."
+      },
+      {
+            "question": "Which Magic Kingdom land has Haunted Mansion?",
+            "answer": "Liberty Square."
+      },
+      {
+            "question": "Which Magic Kingdom attraction features 999 happy haunts?",
+            "answer": "The Haunted Mansion."
+      },
+      {
+            "question": "Which ride has the song 'Yo Ho, Yo Ho, A Pirate’s Life for Me'?",
+            "answer": "Pirates of the Caribbean."
+      },
+      {
+            "question": "Which Magic Kingdom attraction features singing birds and flowers?",
+            "answer": "Walt Disney’s Enchanted Tiki Room."
+      },
+      {
+            "question": "Which Magic Kingdom ride is known as the wildest ride in the wilderness?",
+            "answer": "Big Thunder Mountain Railroad."
+      },
+      {
+            "question": "Which Magic Kingdom attraction has a moving walkway called a speed ramp?",
+            "answer": "Tomorrowland Transit Authority PeopleMover."
+      },
+      {
+            "question": "Which Magic Kingdom attraction follows the Darling children to Never Land?",
+            "answer": "Peter Pan’s Flight."
+      },
+      {
+            "question": "Which Magic Kingdom attraction features Ariel and scenes from The Little Mermaid?",
+            "answer": "Under the Sea – Journey of The Little Mermaid."
+      },
+      {
+            "question": "Which Magic Kingdom attraction is based on Winnie the Pooh?",
+            "answer": "The Many Adventures of Winnie the Pooh."
+      },
+      {
+            "question": "Which Magic Kingdom ride has spinning teacups?",
+            "answer": "Mad Tea Party."
+      },
+      {
+            "question": "Which Magic Kingdom castle is the park’s central icon?",
+            "answer": "Cinderella Castle."
+      },
+      {
+            "question": "Which Magic Kingdom restaurant is themed to Beauty and the Beast?",
+            "answer": "Be Our Guest Restaurant."
+      },
+      {
+            "question": "Which Magic Kingdom land is themed to colonial America?",
+            "answer": "Liberty Square."
+      },
+      {
+            "question": "Which Magic Kingdom show features animatronic bears?",
+            "answer": "Country Bear Jamboree."
+      },
+      {
+            "question": "Which Magic Kingdom boat attraction sails around the Rivers of America?",
+            "answer": "Liberty Square Riverboat."
+      },
+      {
+            "question": "Which Magic Kingdom area has circus theming?",
+            "answer": "Storybook Circus."
+      },
+      {
+            "question": "Which Magic Kingdom ride is a slow-moving tour through Tomorrowland?",
+            "answer": "Tomorrowland Transit Authority PeopleMover."
+      },
+      {
+            "question": "Which Magic Kingdom mountain opened in 1975?",
+            "answer": "Space Mountain."
+      },
+      {
+            "question": "Which EPCOT pavilion contains Spaceship Earth?",
+            "answer": "World Celebration."
+      },
+      {
+            "question": "Which EPCOT pavilion has Soarin’ Around the World?",
+            "answer": "The Land pavilion."
+      },
+      {
+            "question": "Which EPCOT attraction takes guests through greenhouses?",
+            "answer": "Living with the Land."
+      },
+      {
+            "question": "Which EPCOT pavilion has The Seas with Nemo & Friends?",
+            "answer": "The Seas pavilion."
+      },
+      {
+            "question": "Which EPCOT ride stars Figment?",
+            "answer": "Journey Into Imagination with Figment."
+      },
+      {
+            "question": "Which EPCOT World Showcase pavilion has Gran Fiesta Tour?",
+            "answer": "Mexico."
+      },
+      {
+            "question": "Which EPCOT pavilion has Frozen Ever After?",
+            "answer": "Norway."
+      },
+      {
+            "question": "Which EPCOT pavilion has Remy’s Ratatouille Adventure?",
+            "answer": "France."
+      },
+      {
+            "question": "Which EPCOT pavilion has The American Adventure?",
+            "answer": "The American Adventure pavilion."
+      },
+      {
+            "question": "Which EPCOT pavilion has Mitsukoshi Department Store?",
+            "answer": "Japan."
+      },
+      {
+            "question": "Which EPCOT pavilion has the Biergarten Restaurant?",
+            "answer": "Germany."
+      },
+      {
+            "question": "Which EPCOT pavilion has Le Cellier Steakhouse?",
+            "answer": "Canada."
+      },
+      {
+            "question": "Which EPCOT pavilion is home to Rose & Crown?",
+            "answer": "United Kingdom."
+      },
+      {
+            "question": "Which EPCOT pavilion has San Angel Inn?",
+            "answer": "Mexico."
+      },
+      {
+            "question": "Which EPCOT attraction replaced Ellen’s Energy Adventure?",
+            "answer": "Guardians of the Galaxy: Cosmic Rewind."
+      },
+      {
+            "question": "Which EPCOT ride lets guests design a virtual vehicle?",
+            "answer": "Test Track."
+      },
+      {
+            "question": "Which EPCOT nighttime lagoon is surrounded by World Showcase?",
+            "answer": "World Showcase Lagoon."
+      },
+      {
+            "question": "Which EPCOT festival usually features outdoor kitchens and topiaries in spring?",
+            "answer": "EPCOT International Flower & Garden Festival."
+      },
+      {
+            "question": "Which EPCOT spring festival has Garden Rocks concerts?",
+            "answer": "EPCOT International Flower & Garden Festival."
+      },
+      {
+            "question": "Which EPCOT festival is most associated with Frushi?",
+            "answer": "Flower & Garden Festival."
+      },
+      {
+            "question": "Which EPCOT drink is a classic Flower & Garden favorite at Pineapple Promenade?",
+            "answer": "Frozen Desert Violet Lemonade."
+      },
+      {
+            "question": "Which EPCOT country pavilion has maple popcorn?",
+            "answer": "Canada Pavilion."
+      },
+      {
+            "question": "Which EPCOT country pavilion has a replica of the Eiffel Tower?",
+            "answer": "France."
+      },
+      {
+            "question": "Which EPCOT country pavilion has a large indoor pyramid?",
+            "answer": "Mexico."
+      },
+      {
+            "question": "Which EPCOT country pavilion has a stave church-style building?",
+            "answer": "Norway."
+      },
+      {
+            "question": "Which EPCOT country pavilion has a pagoda?",
+            "answer": "Japan."
+      },
+      {
+            "question": "Which EPCOT country pavilion has a tea garden?",
+            "answer": "United Kingdom."
+      },
+      {
+            "question": "Which EPCOT country pavilion has Victoria Gardens?",
+            "answer": "Canada."
+      },
+      {
+            "question": "Which EPCOT country pavilion has a biergarten theme?",
+            "answer": "Germany."
+      },
+      {
+            "question": "Which EPCOT country pavilion has gondola-style theming?",
+            "answer": "Italy."
+      },
+      {
+            "question": "Which EPCOT country pavilion has the American Adventure show?",
+            "answer": "The American Adventure."
+      },
+      {
+            "question": "Which Hollywood Studios ride is inside the Chinese Theatre?",
+            "answer": "Mickey & Minnie’s Runaway Railway."
+      },
+      {
+            "question": "Which Hollywood Studios land is themed to Andy’s backyard?",
+            "answer": "Toy Story Land."
+      },
+      {
+            "question": "Which Hollywood Studios attraction has a 13-story haunted hotel theme?",
+            "answer": "The Twilight Zone Tower of Terror."
+      },
+      {
+            "question": "Which Hollywood Studios coaster features Aerosmith?",
+            "answer": "Rock ’n’ Roller Coaster."
+      },
+      {
+            "question": "Which Hollywood Studios land contains Millennium Falcon: Smugglers Run?",
+            "answer": "Star Wars: Galaxy’s Edge."
+      },
+      {
+            "question": "Which Hollywood Studios attraction includes a First Order Star Destroyer?",
+            "answer": "Star Wars: Rise of the Resistance."
+      },
+      {
+            "question": "Which Hollywood Studios attraction is a 3D shooting game with Toy Story characters?",
+            "answer": "Toy Story Mania."
+      },
+      {
+            "question": "Which Hollywood Studios ride features Slinky Dog?",
+            "answer": "Slinky Dog Dash."
+      },
+      {
+            "question": "Which Hollywood Studios attraction has alien-themed spinning ride vehicles?",
+            "answer": "Alien Swirling Saucers."
+      },
+      {
+            "question": "Which Hollywood Studios show stars Indiana Jones-style stunt scenes?",
+            "answer": "Indiana Jones Epic Stunt Spectacular."
+      },
+      {
+            "question": "Which Hollywood Studios theater show features Muppets?",
+            "answer": "Muppet*Vision 3D."
+      },
+      {
+            "question": "Which Hollywood Studios restaurant is themed like a 1950s drive-in movie theater?",
+            "answer": "Sci-Fi Dine-In Theater Restaurant."
+      },
+      {
+            "question": "Which Hollywood Studios restaurant is themed like a 1950s family kitchen?",
+            "answer": "50’s Prime Time Café."
+      },
+      {
+            "question": "Which Hollywood Studios street is the park’s entrance boulevard?",
+            "answer": "Hollywood Boulevard."
+      },
+      {
+            "question": "Which Hollywood Studios area leads toward Tower of Terror?",
+            "answer": "Sunset Boulevard."
+      },
+      {
+            "question": "Which Hollywood Studios land opened in 2019 and is set on Batuu?",
+            "answer": "Star Wars: Galaxy’s Edge."
+      },
+      {
+            "question": "Which Hollywood Studios attraction replaced The Great Movie Ride?",
+            "answer": "Mickey & Minnie’s Runaway Railway."
+      },
+      {
+            "question": "Which Hollywood Studios ride features Goofy as the train engineer?",
+            "answer": "Mickey & Minnie’s Runaway Railway."
+      },
+      {
+            "question": "Which Animal Kingdom attraction is built around a giant carved tree?",
+            "answer": "The Tree of Life."
+      },
+      {
+            "question": "Which Animal Kingdom ride takes guests on a safari through Harambe Wildlife Reserve?",
+            "answer": "Kilimanjaro Safaris."
+      },
+      {
+            "question": "Which Animal Kingdom coaster is themed to the Himalayas?",
+            "answer": "Expedition Everest."
+      },
+      {
+            "question": "Which Animal Kingdom land contains Pandora?",
+            "answer": "Pandora – The World of Avatar."
+      },
+      {
+            "question": "Which Animal Kingdom ride simulates flying on a banshee?",
+            "answer": "Avatar Flight of Passage."
+      },
+      {
+            "question": "Which Animal Kingdom boat ride is set in Pandora?",
+            "answer": "Na’vi River Journey."
+      },
+      {
+            "question": "Which Animal Kingdom attraction sends guests back in time to rescue an iguanodon?",
+            "answer": "DINOSAUR."
+      },
+      {
+            "question": "Which Animal Kingdom water ride is in Asia?",
+            "answer": "Kali River Rapids."
+      },
+      {
+            "question": "Which Animal Kingdom walking trail features tigers?",
+            "answer": "Maharajah Jungle Trek."
+      },
+      {
+            "question": "Which Animal Kingdom walking trail features gorillas?",
+            "answer": "Gorilla Falls Exploration Trail."
+      },
+      {
+            "question": "Which Animal Kingdom show features music from The Lion King?",
+            "answer": "Festival of the Lion King."
+      },
+      {
+            "question": "Which Animal Kingdom show is based on Finding Nemo?",
+            "answer": "Finding Nemo: The Big Blue… and Beyond!"
+      },
+      {
+            "question": "Which Animal Kingdom area is themed to Africa?",
+            "answer": "Harambe."
+      },
+      {
+            "question": "Which Animal Kingdom area is themed to Asia?",
+            "answer": "Asia."
+      },
+      {
+            "question": "Which Disney park opened on Earth Day in 1998?",
+            "answer": "Disney’s Animal Kingdom."
+      },
+      {
+            "question": "Which Animal Kingdom restaurant is known for ribs and outdoor seating near Discovery Island?",
+            "answer": "Flame Tree Barbecue."
+      },
+      {
+            "question": "Which Animal Kingdom ride has a Yeti figure?",
+            "answer": "Expedition Everest."
+      },
+      {
+            "question": "Which Disney resort is themed to the South Pacific?",
+            "answer": "Disney’s Polynesian Village Resort."
+      },
+      {
+            "question": "Which Disney resort has the Grand Canyon Concourse?",
+            "answer": "Disney’s Contemporary Resort."
+      },
+      {
+            "question": "Which Disney resort is known for Victorian theming near Magic Kingdom?",
+            "answer": "Disney’s Grand Floridian Resort & Spa."
+      },
+      {
+            "question": "Which Disney resort is themed to the Pacific Northwest?",
+            "answer": "Disney’s Wilderness Lodge."
+      },
+      {
+            "question": "Which Disney resort is themed to the Atlantic seaside?",
+            "answer": "Disney’s Beach Club Resort."
+      },
+      {
+            "question": "Which Disney resort is paired with Beach Club near EPCOT?",
+            "answer": "Disney’s Yacht Club Resort."
+      },
+      {
+            "question": "Which Disney resort is themed to turn-of-the-century Atlantic City entertainment?",
+            "answer": "Disney’s BoardWalk Inn."
+      },
+      {
+            "question": "Which Disney resort has large animation-themed sections?",
+            "answer": "Disney’s Art of Animation Resort."
+      },
+      {
+            "question": "Which Disney resort celebrates decades of pop culture?",
+            "answer": "Disney’s Pop Century Resort."
+      },
+      {
+            "question": "Which Disney resort has a Spanish/Mexican/Southwestern theme?",
+            "answer": "Disney’s Coronado Springs Resort."
+      },
+      {
+            "question": "Which Disney resort is split into Riverside and French Quarter?",
+            "answer": "Disney’s Port Orleans Resort."
+      },
+      {
+            "question": "Which Disney resort has savanna views with animals?",
+            "answer": "Disney’s Animal Kingdom Lodge."
+      },
+      {
+            "question": "Which Disney resort is inspired by the European Riviera?",
+            "answer": "Disney’s Riviera Resort."
+      },
+      {
+            "question": "Which Disney Springs store is the large Disney merchandise store?",
+            "answer": "World of Disney."
+      },
+      {
+            "question": "Which transportation system connects Magic Kingdom with nearby monorail resorts?",
+            "answer": "The Walt Disney World Monorail."
+      },
+      {
+            "question": "Which boats connect parts of EPCOT and Hollywood Studios resort area?",
+            "answer": "FriendShip Boats."
+      },
+      {
+            "question": "Which aerial gondola system serves EPCOT and Hollywood Studios area resorts?",
+            "answer": "Disney Skyliner."
+      },
+      {
+            "question": "Which water park has a snowy ski resort theme?",
+            "answer": "Blizzard Beach."
+      },
+      {
+            "question": "Which water park has a tropical storm/backstory theme?",
+            "answer": "Typhoon Lagoon."
+      },
+      {
+            "question": "Which Disney character is known for saying 'Oh boy!'?",
+            "answer": "Mickey Mouse."
+      },
+      {
+            "question": "Who is Mickey Mouse’s girlfriend?",
+            "answer": "Minnie Mouse."
+      },
+      {
+            "question": "Who is Donald Duck’s girlfriend?",
+            "answer": "Daisy Duck."
+      },
+      {
+            "question": "Who is Mickey Mouse’s dog?",
+            "answer": "Pluto."
+      },
+      {
+            "question": "Who is Mickey’s tall, clumsy friend?",
+            "answer": "Goofy."
+      },
+      {
+            "question": "What kind of animal is Donald Duck?",
+            "answer": "A duck."
+      },
+      {
+            "question": "Who created Mickey Mouse with Ub Iwerks?",
+            "answer": "Walt Disney."
+      },
+      {
+            "question": "What was Mickey Mouse’s first synchronized sound cartoon?",
+            "answer": "Steamboat Willie."
+      },
+      {
+            "question": "What year did Steamboat Willie debut?",
+            "answer": "1928."
+      },
+      {
+            "question": "Who is the fairy in Peter Pan?",
+            "answer": "Tinker Bell."
+      },
+      {
+            "question": "Who is the villain in The Little Mermaid?",
+            "answer": "Ursula."
+      },
+      {
+            "question": "Who is the crab in The Little Mermaid?",
+            "answer": "Sebastian."
+      },
+      {
+            "question": "Who is Ariel’s fish friend?",
+            "answer": "Flounder."
+      },
+      {
+            "question": "What is the name of Belle’s beastly host?",
+            "answer": "The Beast."
+      },
+      {
+            "question": "What enchanted candle appears in Beauty and the Beast?",
+            "answer": "Lumière."
+      },
+      {
+            "question": "What enchanted clock appears in Beauty and the Beast?",
+            "answer": "Cogsworth."
+      },
+      {
+            "question": "What enchanted teapot appears in Beauty and the Beast?",
+            "answer": "Mrs. Potts."
+      },
+      {
+            "question": "What is the name of Simba’s father?",
+            "answer": "Mufasa."
+      },
+      {
+            "question": "What is the name of Simba’s uncle?",
+            "answer": "Scar."
+      },
+      {
+            "question": "Who are Simba’s meerkat and warthog friends?",
+            "answer": "Timon and Pumbaa."
+      },
+      {
+            "question": "Which princess loses a glass slipper?",
+            "answer": "Cinderella."
+      },
+      {
+            "question": "Which princess has seven dwarf friends?",
+            "answer": "Snow White."
+      },
+      {
+            "question": "Which princess has very long magical hair?",
+            "answer": "Rapunzel."
+      },
+      {
+            "question": "Which princess is from Agrabah?",
+            "answer": "Jasmine."
+      },
+      {
+            "question": "Which princess is from Motunui?",
+            "answer": "Moana."
+      },
+      {
+            "question": "Which Frozen character sings 'Let It Go'?",
+            "answer": "Elsa."
+      },
+      {
+            "question": "Who is Elsa’s sister?",
+            "answer": "Anna."
+      },
+      {
+            "question": "What is the name of the snowman in Frozen?",
+            "answer": "Olaf."
+      },
+      {
+            "question": "What is the name of Kristoff’s reindeer?",
+            "answer": "Sven."
+      },
+      {
+            "question": "Which Pixar movie features Woody and Buzz Lightyear?",
+            "answer": "Toy Story."
+      },
+      {
+            "question": "What is the name of Andy’s cowboy toy?",
+            "answer": "Woody."
+      },
+      {
+            "question": "What is the name of the space ranger toy in Toy Story?",
+            "answer": "Buzz Lightyear."
+      },
+      {
+            "question": "What is the name of the cowgirl in Toy Story 2?",
+            "answer": "Jessie."
+      },
+      {
+            "question": "What Pixar movie features a rat who cooks?",
+            "answer": "Ratatouille."
+      },
+      {
+            "question": "What is the name of the rat in Ratatouille?",
+            "answer": "Remy."
+      },
+      {
+            "question": "What Pixar movie features emotions inside a girl’s mind?",
+            "answer": "Inside Out."
+      },
+      {
+            "question": "What Pixar movie features a family of superheroes?",
+            "answer": "The Incredibles."
+      },
+      {
+            "question": "What Pixar movie is set in the Land of the Dead?",
+            "answer": "Coco."
+      },
+      {
+            "question": "What Pixar movie features a clownfish searching for his son?",
+            "answer": "Finding Nemo."
+      },
+      {
+            "question": "What is Nemo’s father’s name?",
+            "answer": "Marlin."
+      },
+      {
+            "question": "What is the forgetful blue fish’s name?",
+            "answer": "Dory."
+      },
+      {
+            "question": "What Pixar movie is about a trash-compacting robot?",
+            "answer": "WALL-E."
+      },
+      {
+            "question": "What Pixar movie features a house lifted by balloons?",
+            "answer": "Up."
+      },
+      {
+            "question": "What is the old man’s name in Up?",
+            "answer": "Carl Fredricksen."
+      },
+      {
+            "question": "What is the Wilderness Explorer boy’s name in Up?",
+            "answer": "Russell."
+      },
+      {
+            "question": "Which Disney movie features a magic carpet?",
+            "answer": "Aladdin."
+      },
+      {
+            "question": "Which Disney movie features a genie in a lamp?",
+            "answer": "Aladdin."
+      },
+      {
+            "question": "Which Disney movie features the song 'Hakuna Matata'?",
+            "answer": "The Lion King."
+      },
+      {
+            "question": "Which Disney movie features the song 'Under the Sea'?",
+            "answer": "The Little Mermaid."
+      },
+      {
+            "question": "Which Disney movie features the song 'Be Our Guest'?",
+            "answer": "Beauty and the Beast."
+      },
+      {
+            "question": "Which Disney movie features the song 'A Whole New World'?",
+            "answer": "Aladdin."
+      },
+      {
+            "question": "Which Disney movie features the song 'How Far I’ll Go'?",
+            "answer": "Moana."
+      },
+      {
+            "question": "Which Disney movie features the Madrigal family?",
+            "answer": "Encanto."
+      },
+      {
+            "question": "What is Mirabel’s family name in Encanto?",
+            "answer": "Madrigal."
+      },
+      {
+            "question": "Which Encanto character is told 'We don’t talk about'?",
+            "answer": "Bruno."
+      },
+      {
+            "question": "Which Disney movie features a rabbit police officer named Judy Hopps?",
+            "answer": "Zootopia."
+      },
+      {
+            "question": "What is the fox’s name in Zootopia?",
+            "answer": "Nick Wilde."
+      },
+      {
+            "question": "Which Disney movie features Ralph and Vanellope?",
+            "answer": "Wreck-It Ralph."
+      },
+      {
+            "question": "Which Disney movie features Stitch?",
+            "answer": "Lilo & Stitch."
+      },
+      {
+            "question": "What is the name of the Hawaiian girl who adopts Stitch?",
+            "answer": "Lilo."
+      },
+      {
+            "question": "Which Disney movie features Baymax?",
+            "answer": "Big Hero 6."
+      },
+      {
+            "question": "Which Disney movie features a wooden puppet who wants to be real?",
+            "answer": "Pinocchio."
+      },
+      {
+            "question": "What is the name of Pinocchio’s conscience?",
+            "answer": "Jiminy Cricket."
+      },
+      {
+            "question": "Which Disney movie features a flying elephant?",
+            "answer": "Dumbo."
+      },
+      {
+            "question": "Which Disney movie features a deer named Bambi?",
+            "answer": "Bambi."
+      },
+      {
+            "question": "Which Disney movie features a bear named Baloo?",
+            "answer": "The Jungle Book."
+      },
+      {
+            "question": "Which Disney movie features Mowgli?",
+            "answer": "The Jungle Book."
+      },
+      {
+            "question": "Which Disney movie features a Dalmatian puppy family?",
+            "answer": "101 Dalmatians."
+      },
+      {
+            "question": "Which Disney villain wants the Dalmatian puppies?",
+            "answer": "Cruella de Vil."
+      },
+      {
+            "question": "Which Disney movie features Robin Hood as a fox?",
+            "answer": "Robin Hood."
+      },
+      {
+            "question": "Which Disney movie features Hercules and Pegasus?",
+            "answer": "Hercules."
+      },
+      {
+            "question": "Which Disney villain has a blue flame hairstyle?",
+            "answer": "Hades."
+      },
+      {
+            "question": "Which Disney movie features Mulan?",
+            "answer": "Mulan."
+      },
+      {
+            "question": "What is Mulan’s dragon companion named?",
+            "answer": "Mushu."
+      },
+      {
+            "question": "Which Disney movie features Pocahontas and Meeko?",
+            "answer": "Pocahontas."
+      },
+      {
+            "question": "Which Disney movie features Tiana?",
+            "answer": "The Princess and the Frog."
+      },
+      {
+            "question": "Which city is The Princess and the Frog associated with?",
+            "answer": "New Orleans."
+      },
+      {
+            "question": "Which Disney movie features a villain named Dr. Facilier?",
+            "answer": "The Princess and the Frog."
+      },
+      {
+            "question": "Which Disney movie features Quasimodo?",
+            "answer": "The Hunchback of Notre Dame."
+      },
+      {
+            "question": "Which Disney movie features Tarzan and Jane?",
+            "answer": "Tarzan."
+      },
+      {
+            "question": "Which Disney attraction inspired a movie starring pirates?",
+            "answer": "Pirates of the Caribbean."
+      },
+      {
+            "question": "Which Disney attraction inspired a movie about a haunted house?",
+            "answer": "The Haunted Mansion."
+      },
+      {
+            "question": "Which Disney attraction has a skipper telling jokes on a boat?",
+            "answer": "Jungle Cruise."
+      },
+      {
+            "question": "Which Disney park icon is Cinderella Castle?",
+            "answer": "Magic Kingdom."
+      },
+      {
+            "question": "Which Disney park icon is Spaceship Earth?",
+            "answer": "EPCOT."
+      },
+      {
+            "question": "Which Disney park icon is the Tree of Life?",
+            "answer": "Animal Kingdom."
+      },
+      {
+            "question": "Which Disney park icon at Hollywood Studios is the Chinese Theatre?",
+            "answer": "Disney’s Hollywood Studios."
+      }
+];
     const packingItems = ["MagicBands", "Park tickets linked in My Disney Experience", "Portable phone chargers", "Ponchos", "Cooling towels", "Sunscreen", "Comfortable walking shoes", "Autograph book", "Refillable water bottle", "Sunglasses", "Hats", "Snacks for the car or room", "Disney gift cards", "Medication", "Swimsuits", "Band-Aids or blister pads", "Hand sanitizer", "Small backpack or park bag", "Extra socks", "Laundry bag", "Zip-top bags", "Phone charging cords", "Portable fans", "Moleskin for blisters", "Light jacket or hoodie", "Kids’ headphones or comfort items"];
     const foodBooths = [{"location": "CommuniCore Plaza • Through May 25", "name": "Florida Fresh", "top": ["Blackened Fish Slider", "Florida Strawberry Shortcake"], "gf": "No strong gluten-free entrée from the main menu sources; check Disney allergy info/Cast Member. This booth ends May 25, so it mainly helps the EPCOT group going that day.", "note": "WDWNT ranked the Florida Strawberry Shortcake in its Best 7, but Florida Fresh is scheduled only through May 25.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Odyssey Events Pavilion", "name": "The Citrus Blossom", "top": ["Cinnamon Beignets", "Orange-Lemon Smoothie"], "gf": "No clear gluten-free food pick from the menu sources. Treat this more as a drink/sipper stop and verify with a Cast Member.", "note": "DFB called the Cinnamon Beignets one of the new bests and the Orange-Lemon Smoothie a kid-friendly highlight.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Near Test Track", "name": "BRUNCHCOT", "top": ["Shrimp and Grits", "Avocado Toast"], "gf": "No clear gluten-free listing found for the booth’s food items. Ask for the allergy binder before ordering.", "note": "French Toast had mixed/negative review notes from WDWNT, so it is not a priority here.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Mexico", "name": "Jardin de Fiestas", "top": ["Chilaquiles con Carne", "Flan de la Abuela"], "gf": "Potential ask: Chilaquiles con Carne may be worth checking because it uses corn tortillas, but this is not confirmed gluten-free here.", "note": "Skip the Flower Power Margarita based on WDWNT’s review.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "China", "name": "Lan Yuan", "top": ["Sha Cha Beef Bao Bun", "Tanghulu"], "gf": "Tanghulu is the best gluten-free question to ask about, but confirm the ingredient binder due to booth prep/cross-contact.", "note": "Disney specifically highlighted Sha Cha Beef Bao Bun as a new eat to try.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Germany", "name": "Bauernmarkt: Farmer’s Market", "top": ["Warm Cheese Strudel", "Toasted Pretzel Bread with Black Forest Ham and Melted Cheese"], "gf": "Potato Pancakes with house-made applesauce — listed gluten-free and plant-based.", "note": "DFB called Warm Cheese Strudel a must-have and the Pretzel Bread another favorite.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "The American Adventure", "name": "Magnolia Terrace", "top": ["Blackened Shrimp Po’ Boy", "Grilled Gulf Oysters"], "gf": "Grilled Gulf Oysters with cajun andouille sausage butter and lemon — listed gluten-free.", "note": "WDWNT ranked the Shrimp Po’ Boy as its #1 best item.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Japan", "name": "Hanami", "top": ["Frushi", "Japanese Curry Bread"], "gf": "Frushi is the classic Flower & Garden ask; verify gluten-free status at the booth due to cross-contact.", "note": "Frushi is one of the classic Flower & Garden items.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Between Morocco and France", "name": "La Isla Fresca", "top": ["Jamaican Jerk Chicken", "Coconut-Chocolate Flancocho"], "gf": "Jamaican Jerk Chicken and Coconut-Chocolate Flancocho are both listed gluten-free in festival summaries; verify at booth.", "note": "WDWNT did not like the ceviche, so it is not a top pick.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Canada", "name": "Northern Bloom", "top": ["Seared Scallops", "Beef Tenderloin Tips"], "gf": "Both Seared Scallops and Beef Tenderloin Tips are listed gluten-free in several festival planning summaries.", "note": "One of the best booths for real gluten-free savory choices.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Near Canada", "name": "Refreshment Port", "top": ["Provence Poutine", "Frozen Mojito"], "gf": "Provence Poutine is a gluten-free ask; verify ingredients and fryer/cross-contact.", "note": "Good stop for a hearty snack if you are near Canada.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Near Port of Entry", "name": "Pineapple Promenade", "top": ["Frozen Desert Violet Lemonade", "DOLE Whip Pineapple"], "gf": "DOLE Whip Pineapple is usually the safer gluten-free-style pick when served in a cup, not a cone; verify at booth.", "note": "Frozen Desert Violet Lemonade remains a classic kid/adult favorite.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Near Disney Traders", "name": "Trowel & Trellis", "top": ["Miso Cola-glazed Sticky Pork Ribs", "Chocolate Mousse Terrarium"], "gf": "Chocolate Mousse Terrarium is listed gluten-free in festival planning summaries; verify at booth.", "note": "DFB named Trowel & Trellis Best Booth of the Fest; WDWNT also liked the pork rib.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Between World Showcase and Imagination!", "name": "Beach Grub", "top": ["Grilled Street Corn on the Cob", "Seafood Bake"], "gf": "Grilled Street Corn on the Cob is listed gluten-free and plant-based in festival summaries.", "note": "DFB called the grilled street corn one of the best plant-based dishes.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Between World Showcase and Imagination!", "name": "Yacht Grub", "top": ["Trio of Dips and Chips", "Captain’s Board"], "gf": "Trio of Dips and Chips is listed gluten-free in festival summaries; verify at booth.", "note": "DFB called the Trio of Dips and Chips a returning best.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}, {"location": "Between China and Germany", "name": "Refreshment Outpost", "top": ["Seasonal Fruit Parfait with DOLE Whip Mango", "Nigerian Beef Pie"], "gf": "Seasonal Fruit Parfait with DOLE Whip Mango is listed gluten-free and plant-based in festival summaries.", "note": "Useful lighter stop while walking World Showcase.", "link": "https://disneyparksblog.com/wdw/disney-eats-epcot-international-flower-and-garden-festival-foodie-guide-2026/"}];
 
@@ -591,6 +1493,8 @@
       currentTriviaIndex: 0,
       activeHuntArea: "All",
       activeAttraction: "All",
+      activeMapPark: "Magic Kingdom",
+      selectedMapHuntIndex: null,
       filteredHuntIndexes: [],
       currentFilteredPosition: 0,
       celebratedCountdowns: {}
@@ -728,12 +1632,6 @@
     }
 
     function huntMarkup(hunt, globalIndex) {
-      const photoMarkup = hunt.imageUrl
-        ? `<div class="hunt-photo-wrap">
-             <img class="hunt-photo" src="${escapeHtml(hunt.imageUrl)}" alt="Photo for ${escapeHtml(hunt.attraction || hunt.location)}" loading="lazy" />
-             <div class="hunt-photo-credit">${escapeHtml(hunt.photoCredit || "Licensed photo")} • <a href="${escapeHtml(hunt.licenseUrl || "#")}" target="_blank" rel="noopener">${escapeHtml(hunt.licenseText || "Source")}</a></div>
-           </div>`
-        : `<div class="hunt-photo-placeholder">📷 No clearly reusable photo added yet. Take your own picture on the trip and add it later.</div>`;
       const found = !!state.huntFound[globalIndex];
       const foundButton = found
         ? `<button class="button success" onclick="toggleHuntFound(${globalIndex})">✓ Found It! <span style="font-weight:500;opacity:.85;margin-left:6px;">(undo)</span></button>`
@@ -744,7 +1642,6 @@
         <div class="hunt-location">${escapeHtml(hunt.attraction || hunt.location)}</div>
         <p><strong>Exact target:</strong> ${escapeHtml(hunt.location)}</p>
         <span class="confidence-pill">Confidence: ${escapeHtml(hunt.confidence || "Reported")}</span>
-        ${photoMarkup}
         <p>${escapeHtml(hunt.clue)}</p>
         <p class="small"><strong>Source note:</strong> ${escapeHtml(hunt.sourceNote || "Reported Hidden Mickey location; verify in person because details can change.")}</p>
         <div class="hunt-status-row">${foundButton}${badge}</div>
@@ -810,6 +1707,8 @@
       rebuildFilteredHunts(false);
       renderHuntFilters();
       renderHunt();
+      renderMapParkButtons();
+      renderHiddenMickeyMap();
     }
     function setAttractionFilter(attraction) {
       state.activeAttraction = attraction;
@@ -833,6 +1732,173 @@
     function prevHunt() { state.currentFilteredPosition = (state.currentFilteredPosition - 1 + state.filteredHuntIndexes.length) % state.filteredHuntIndexes.length; renderHunt(); }
     function randomHunt() { state.currentFilteredPosition = Math.floor(Math.random() * state.filteredHuntIndexes.length); renderHunt(); }
     function dailyHunt() { state.activeHuntArea = "All"; state.activeAttraction = "All"; rebuildFilteredHunts(true); renderHuntFilters(); renderHunt(); }
+
+
+    const parkMapLayouts = {
+      "Magic Kingdom": {
+        label: "Magic\\nKingdom",
+        lands: [
+          { name: "Adventureland", x: 20, y: 52 },
+          { name: "Frontierland", x: 25, y: 28 },
+          { name: "Liberty Square", x: 43, y: 30 },
+          { name: "Fantasyland", x: 55, y: 20 },
+          { name: "Tomorrowland", x: 75, y: 42 },
+          { name: "Main Street", x: 50, y: 74 }
+        ]
+      },
+      "EPCOT": {
+        label: "EPCOT",
+        lands: [
+          { name: "World Celebration", x: 48, y: 28 },
+          { name: "World Nature", x: 22, y: 42 },
+          { name: "World Discovery", x: 74, y: 40 },
+          { name: "World Showcase", x: 52, y: 74 }
+        ]
+      },
+      "Hollywood Studios": {
+        label: "Hollywood\\nStudios",
+        lands: [
+          { name: "Hollywood Boulevard", x: 48, y: 72 },
+          { name: "Echo Lake", x: 62, y: 50 },
+          { name: "Sunset Boulevard", x: 24, y: 42 },
+          { name: "Toy Story Land", x: 46, y: 28 },
+          { name: "Galaxy’s Edge", x: 76, y: 24 }
+        ]
+      },
+      "Animal Kingdom": {
+        label: "Animal\\nKingdom",
+        lands: [
+          { name: "Discovery Island", x: 50, y: 50 },
+          { name: "Africa", x: 28, y: 35 },
+          { name: "Asia", x: 70, y: 34 },
+          { name: "Pandora", x: 24, y: 68 },
+          { name: "DinoLand", x: 74, y: 68 }
+        ]
+      }
+    };
+
+    const mapCoordinates = {
+      "Magic Kingdom|Big Thunder Mountain Railroad": [26, 27],
+      "Magic Kingdom|Haunted Mansion": [42, 30],
+      "Magic Kingdom|Jungle Cruise": [20, 52],
+      "Magic Kingdom|Under the Sea – Journey of The Little Mermaid": [58, 17],
+      "Magic Kingdom|Cinderella Castle": [50, 56],
+      "Magic Kingdom|Main Street Confectionery": [50, 76],
+      "Magic Kingdom|Buzz Lightyear’s Space Ranger Spin": [76, 44],
+      "Magic Kingdom|Space Mountain": [82, 35],
+      "Magic Kingdom|Seven Dwarfs Mine Train": [61, 21],
+
+      "EPCOT|Spaceship Earth": [48, 24],
+      "EPCOT|Living with the Land": [22, 42],
+      "EPCOT|Journey of Water, Inspired by Moana": [30, 35],
+      "EPCOT|Gran Fiesta Tour": [42, 77],
+      "EPCOT|Mission: SPACE": [75, 38],
+      "EPCOT|Meet Mickey & Friends": [48, 31],
+      "EPCOT|Morocco Pavilion": [59, 80],
+      "EPCOT|Canada Pavilion": [37, 63],
+
+      "Hollywood Studios|Tower of Terror": [24, 42],
+      "Hollywood Studios|Star Tours": [62, 52],
+      "Hollywood Studios|Toy Story Mania": [45, 30],
+      "Hollywood Studios|Alien Swirling Saucers": [50, 25],
+      "Hollywood Studios|Slinky Dog Dash": [48, 22],
+      "Hollywood Studios|Millennium Falcon: Smugglers Run": [76, 24],
+
+      "Animal Kingdom|DINOSAUR": [76, 70],
+      "Animal Kingdom|Maharajah Jungle Trek": [72, 34],
+      "Animal Kingdom|The Boneyard": [73, 70],
+      "Animal Kingdom|Chester & Hester’s Dino-Rama": [78, 67],
+      "Animal Kingdom|Avatar Flight of Passage": [24, 68],
+      "Animal Kingdom|Pandora pathways": [20, 70],
+      "Animal Kingdom|Tree of Life": [50, 50]
+    };
+
+    function getMapCoord(hunt) {
+      const key = `${hunt.area}|${hunt.attraction}`;
+      if (mapCoordinates[key]) return mapCoordinates[key];
+      const land = (hunt.land || "").toLowerCase();
+      const layout = parkMapLayouts[hunt.area];
+      if (!layout) return [50, 50];
+      const landMatch = layout.lands.find(l => land.includes(l.name.toLowerCase()) || l.name.toLowerCase().includes(land.split(" ")[0]));
+      if (landMatch) return [landMatch.x, landMatch.y];
+      return [50, 50];
+    }
+
+    function renderMapParkButtons() {
+      const parks = Object.keys(parkMapLayouts);
+      const container = document.getElementById("mapParkButtons");
+      if (!container) return;
+      container.innerHTML = parks.map(park => `
+        <button class="filter-button ${park === state.activeMapPark ? "active" : ""}" onclick="setMapPark('${park.replace(/'/g, "\\'")}')">${escapeHtml(park)}</button>
+      `).join("");
+    }
+
+    function setMapPark(park) {
+      state.activeMapPark = park;
+      state.selectedMapHuntIndex = null;
+      renderMapParkButtons();
+      renderHiddenMickeyMap();
+    }
+
+    function selectMapHunt(globalIndex) {
+      state.selectedMapHuntIndex = globalIndex;
+      const hunt = hiddenMickeyHunts[globalIndex];
+      state.activeHuntArea = hunt.area;
+      state.activeAttraction = hunt.attraction || "All";
+      rebuildFilteredHunts(false);
+      const pos = state.filteredHuntIndexes.indexOf(globalIndex);
+      if (pos >= 0) state.currentFilteredPosition = pos;
+      renderHuntFilters();
+      renderHunt();
+      renderMapParkButtons();
+      renderHiddenMickeyMap();
+      renderHiddenMickeyMap();
+    }
+
+    function renderHiddenMickeyMap() {
+      const container = document.getElementById("hiddenMickeyMap");
+      if (!container) return;
+      const park = state.activeMapPark;
+      const layout = parkMapLayouts[park];
+      const parkHunts = hiddenMickeyHunts
+        .map((hunt, index) => ({ hunt, index }))
+        .filter(item => item.hunt.area === park);
+
+      const landLabels = layout.lands.map(land =>
+        `<div class="map-land" style="left:${land.x}%; top:${land.y}%;">${escapeHtml(land.name)}</div>`
+      ).join("");
+
+      const pins = parkHunts.map((item, pinNumber) => {
+        const [x, y] = getMapCoord(item.hunt);
+        const active = state.selectedMapHuntIndex === item.index ? "active" : "";
+        const title = `${item.hunt.attraction}: ${item.hunt.location}`;
+        return `<button class="map-pin ${active}" style="left:${x}%; top:${y}%;" title="${escapeHtml(title)}" onclick="selectMapHunt(${item.index})"><span>${pinNumber + 1}</span></button>`;
+      }).join("");
+
+      const selected = state.selectedMapHuntIndex !== null ? hiddenMickeyHunts[state.selectedMapHuntIndex] : parkHunts[0]?.hunt;
+      const selectedIndex = state.selectedMapHuntIndex !== null ? state.selectedMapHuntIndex : parkHunts[0]?.index;
+
+      const popup = selected ? `
+        <div class="map-popup">
+          <div class="hunt-area">${escapeHtml(selected.area)} • ${escapeHtml(selected.land || "")}</div>
+          <h3>${escapeHtml(selected.attraction || selected.location)}</h3>
+          <p><strong>Exact target:</strong> ${escapeHtml(selected.location)}</p>
+          <p>${escapeHtml(selected.clue)}</p>
+          <div class="hunt-status-row">
+            <span class="confidence-pill">Confidence: ${escapeHtml(selected.confidence || "Reported")}</span>
+            <button class="button primary" onclick="selectMapHunt(${selectedIndex}); document.getElementById('hiddenMickeyTip').scrollIntoView({behavior:'smooth', block:'start'});">Show Hunt Card</button>
+          </div>
+        </div>
+      ` : "";
+
+      const label = layout.label.split("\\n").join("<br>");
+      container.innerHTML = `
+        <div class="map-bg-label" style="left:6%; top:8%;">${label}</div>
+        ${landLabels}
+        ${pins}
+        ${popup}
+      `;
+    }
 
     function renderTrivia() {
       const trivia = disneyTrivia[state.currentTriviaIndex];
@@ -1030,6 +2096,8 @@
       rebuildFilteredHunts(true);
       renderHuntFilters();
       renderHunt();
+      renderMapParkButtons();
+      renderHiddenMickeyMap();
       renderTrivia();
       renderPackingList();
       renderParkPlans();
